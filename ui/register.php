@@ -26,7 +26,7 @@ require_once('../app/partials/head.php');
                                     <form method="POST">
                                         <div class="form-group">
                                             <label class="mb-1 text-white"><strong>Full Names</strong></label>
-                                            <input required type="email" name="client_name" class="form-control">
+                                            <input required type="text" name="client_name" class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <label class="mb-1 text-white"><strong>Email</strong></label>
