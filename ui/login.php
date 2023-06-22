@@ -5,7 +5,7 @@ require_once('../app/helpers/auth.php');
 require_once('../app/partials/head.php');
 ?>
 
-<body class="h-100">
+<body class="h-100" style="background-image: url(../public/images/banner3.jpg);">
     <div class="authincation h-100">
         <div class="container h-100">
             <br>
