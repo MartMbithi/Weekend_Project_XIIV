@@ -90,35 +90,34 @@ if (isset($_POST['Login'])) {
 }
 
 /* Register */
-if (isset($_POST['Register'])) {
-    $blood_donor_names = mysqli_real_escape_string($mysqli, $_POST['blood_donor_names']);
-    $blood_donor_contacts = mysqli_real_escape_string($mysqli, $_POST['blood_donor_contacts']);
-    $blood_donor_email = mysqli_real_escape_string($mysqli, $_POST['blood_donor_email']);
-    $blood_donor_address = mysqli_real_escape_string($mysqli, $_POST['blood_donor_address']);
-    $blood_donor_blood_group = mysqli_real_escape_string($mysqli, $_POST['blood_donor_blood_group']);
+if (isset($_POST['Register_Client'])) {
+    $client_name = mysqli_real_escape_string($mysqli, $_POST['client_name']);
+    $client_email = mysqli_real_escape_string($mysqli, $_POST['client_email']);
+    $client_contact = mysqli_real_escape_string($mysqli, $_POST['client_contact']);
+    $client_address = mysqli_real_escape_string($mysqli, $_POST['client_address']);
     $login_password = sha1(md5(mysqli_real_escape_string($mysqli, $_POST['login_password'])));
-    $login_username = mysqli_real_escape_string($mysqli, $_POST['blood_donor_email']);
-    $login_rank = mysqli_real_escape_string($mysqli, 'Donor');
+    $login_email = mysqli_real_escape_string($mysqli, $_POST['client_email']);
+    $login_rank = mysqli_real_escape_string($mysqli, 'Client');
 
     /* Prevent Duplications */
-    $duplication_checker = "SELECT * FROM login WHERE login_username = '{$login_username}'";
+    $duplication_checker = "SELECT * FROM login WHERE login_email = '{$login_email}'";
     $res = mysqli_query($mysqli, $duplication_checker);
     if (mysqli_num_rows($res) > 0) {
         $err = "An account with this email already exists";
     } else {
         /* Persist */
-        $add_donor_auth = "INSERT INTO login (login_username, login_password, login_rank)
-        VALUES('{$login_username}', '{$login_password}', '{$login_rank}')";
+        $add_donor_auth = "INSERT INTO login (login_email, login_password, login_rank)
+        VALUES('{$login_email}', '{$login_password}', '{$login_rank}')";
 
         if (mysqli_query($mysqli, $add_donor_auth)) {
-            /* Get Donor Login ID */
-            $donor_login_id = mysqli_real_escape_string($mysqli, mysqli_insert_id($mysqli));
+            /* Get  Login ID */
+            $client_login_id = mysqli_real_escape_string($mysqli, mysqli_insert_id($mysqli));
 
             /* Persist Donor */
-            $add_donor_sql = "INSERT INTO blood_donor (blood_donor_login_id, blood_donor_names, blood_donor_email, blood_donor_contacts, blood_donor_address, blood_donor_blood_group)
-            VALUES('{$donor_login_id}', '{$blood_donor_names}', '{$blood_donor_email}', '{$blood_donor_contacts}', '{$blood_donor_address}', '{$blood_donor_blood_group}')";
+            $add_sql = "INSERT INTO client (client_login_id, client_name, client_email, client_contact, client_address)
+            VALUES('{$client_login_id}', '{$client_name}', '{$client_email}', '{$client_contact}', '{$client_address}')";
 
-            if (mysqli_query($mysqli, $add_donor_sql)) {
+            if (mysqli_query($mysqli, $add_sql)) {
                 $_SESSION['success'] = "Account created successfully, proceed to login";
                 header('Location: login');
                 exit;

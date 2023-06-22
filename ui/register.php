@@ -20,22 +20,38 @@ require_once('../app/partials/head.php');
                                     </div>
                                     <h4 class="text-center mb-4 text-white">
                                         Veterinatry Clininc Management System <br>
-                                        Confirm Password
+                                        Sign In
                                     </h4>
                                     <hr>
                                     <form method="POST">
                                         <div class="form-group">
-                                            <label class="mb-1 text-white"><strong>New Password</strong></label>
-                                            <input required type="password" name="confirm_password" class="form-control">
+                                            <label class="mb-1 text-white"><strong>Full Names</strong></label>
+                                            <input required type="email" name="client_name" class="form-control">
                                         </div>
                                         <div class="form-group">
-                                            <label class="mb-1 text-white"><strong>Confirm Password</strong></label>
-                                            <input required type="password" name="new_password" class="form-control">
+                                            <label class="mb-1 text-white"><strong>Email</strong></label>
+                                            <input required type="email" name="client_email" class="form-control">
                                         </div>
+                                        <div class="form-group">
+                                            <label class="mb-1 text-white"><strong>Contacts</strong></label>
+                                            <input required type="text" name="client_contact" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="mb-1 text-white"><strong>Address</strong></label>
+                                            <input required type="text" name="client_address" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="mb-1 text-white"><strong>Password</strong></label>
+                                            <input required type="password" name="login_password" class="form-control">
+                                        </div>
+
                                         <div class="text-center">
-                                            <button type="submit" name="Reset_Password_1" class="btn bg-white text-primary btn-block">Reset Password</button>
+                                            <button type="submit" name="Register_Client" class="btn bg-white text-primary btn-block">Sign Up</button>
                                         </div>
                                     </form>
+                                    <div class="new-account mt-3">
+                                        <p class="text-white">Already have an account? <a class="text-white" href="login">Sign In</a></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
