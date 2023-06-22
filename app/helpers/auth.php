@@ -67,11 +67,11 @@
 
 /* Login */
 if (isset($_POST['Login'])) {
-    $login_username = mysqli_real_escape_string($mysqli, $_POST['login_username']);
+    $login_email = mysqli_real_escape_string($mysqli, $_POST['login_email']);
     $login_password = sha1(md5(mysqli_real_escape_string($mysqli, $_POST['login_password'])));
 
     /* Process login */
-    $login_sql = "SELECT * FROM login WHERE login_username = '{$login_username}' AND login_password = '{$login_password}'";
+    $login_sql = "SELECT * FROM login WHERE login_email = '{$login_email}' AND login_password = '{$login_password}'";
     $res = mysqli_query($mysqli, $login_sql);
     if (mysqli_num_rows($res) > 0) {
         $row = mysqli_fetch_assoc($res);
@@ -82,7 +82,6 @@ if (isset($_POST['Login'])) {
         $_SESSION['success'] = 'Logged in successfully';
         header('Location: dashboard');
         exit;
-        
     } else {
         $_SESSION['err'] = 'Incorrect login details';
         header('Location: login');
@@ -134,10 +133,10 @@ if (isset($_POST['Register'])) {
 
 /* Reset Password Step 1 */
 if (isset($_POST['Reset_Password_1'])) {
-    $login_username  = mysqli_real_escape_string($mysqli, $_POST['login_username']);
+    $login_email  = mysqli_real_escape_string($mysqli, $_POST['login_email']);
 
     /* Check If Login Username Exists */
-    $username_checker = "SELECT * FROM login WHERE login_username = '{$login_username}'";
+    $username_checker = "SELECT * FROM login WHERE login_email = '{$login_email}'";
     $res = mysqli_query($mysqli, $username_checker);
     if (mysqli_num_rows($res) > 0) {
         /* Redirect to reset password step 2 */
@@ -151,7 +150,7 @@ if (isset($_POST['Reset_Password_1'])) {
 
 /* Reset Password Step 2 */
 if (isset($_POST['Reset_Password_Step_2'])) {
-    $login_username = mysqli_real_escape_string($mysqli, $_SESSION['login_username']);
+    $login_email = mysqli_real_escape_string($mysqli, $_SESSION['login_email']);
     $new_password = sha1(md5(mysqli_real_escape_string($mysqli, $_POST['new_password'])));
     $confirm_password = sha1(md5(mysqli_real_escape_string($mysqli, $_POST['confirm_password'])));
 
@@ -160,7 +159,7 @@ if (isset($_POST['Reset_Password_Step_2'])) {
         $err = "Passwords does not match";
     } else {
         /* Persist */
-        $update_passwords = "UPDATE login SET login_password = '{$confirm_password}' WHERE login_username = '{$login_username}'";
+        $update_passwords = "UPDATE login SET login_password = '{$confirm_password}' WHERE login_email = '{$login_email}'";
 
         if (mysqli_query($mysqli, $update_passwords)) {
             /* Redirect to login */
