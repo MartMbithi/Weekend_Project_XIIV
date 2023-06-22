@@ -16,6 +16,7 @@
     <!-- Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <!-- Alerts -->
+    <link href="../public/vendor/sweetalert2/sweetalert2.min.css" rel="stylesheet">
     <link href="../public/vendor/toastr/toastr.min.css" rel="stylesheet">
     <!-- Pop Alerts On Session -->
     <?php
@@ -24,9 +25,9 @@
         $success = $_SESSION['success'];
         unset($_SESSION['success']);
     }
-    if (isset($_SESSION['error'])) {
-        $info = $_SESSION['error'];
-        unset($_SESSION['error']);
+    if (isset($_SESSION['err'])) {
+        $err = $_SESSION['err'];
+        unset($_SESSION['err']);
     }
     ?>
 </head>

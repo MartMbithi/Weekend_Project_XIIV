@@ -23,7 +23,7 @@ require_once('../app/partials/head.php');
                                         Sign In
                                     </h4>
                                     <hr>
-                                    <form action="index.html">
+                                    <form method="POST">
                                         <div class="form-group">
                                             <label class="mb-1 text-white"><strong>Email</strong></label>
                                             <input required type="email" name="login_email" class="form-control">
