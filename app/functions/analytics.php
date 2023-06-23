@@ -71,7 +71,7 @@ $login_id = mysqli_real_escape_string($mysqli, $_SESSION['login_id']);
 if ($login_rank == 'Admin') {
 
     /* Doctors */
-    $query = "";
+    $query = "SELECT COUNT(*) FROM veterinary_doctor";
     $stmt = $mysqli->prepare($query);
     $stmt->execute();
     $stmt->bind_result($docs);
@@ -79,7 +79,7 @@ if ($login_rank == 'Admin') {
     $stmt->close();
 
     /* Clients */
-    $query = "";
+    $query = "SELECT COUNT(*) FROM client";
     $stmt = $mysqli->prepare($query);
     $stmt->execute();
     $stmt->bind_result($clients);
@@ -87,7 +87,7 @@ if ($login_rank == 'Admin') {
     $stmt->close();
 
     /* Pets */
-    $query = "";
+    $query = "SELECT COUNT(*) FROM pets";
     $stmt = $mysqli->prepare($query);
     $stmt->execute();
     $stmt->bind_result($pets);
@@ -95,7 +95,7 @@ if ($login_rank == 'Admin') {
     $stmt->close();
 
     /* Treatments */
-    $query = "";
+    $query = "SELECT COUNT(*) FROM treatments";
     $stmt = $mysqli->prepare($query);
     $stmt->execute();
     $stmt->bind_result($treatments);
@@ -103,7 +103,7 @@ if ($login_rank == 'Admin') {
     $stmt->close();
 
     /* Paymenets */
-    $query = "";
+    $query = "SELECT SUM(payment_amount) FROM payments";
     $stmt = $mysqli->prepare($query);
     $stmt->execute();
     $stmt->bind_result($payments);
@@ -111,7 +111,10 @@ if ($login_rank == 'Admin') {
     $stmt->close();
 } else {
     /* Treatments */
-    $query = "";
+    $query = "SELECT COUNT(*) FROM treatments t 
+    INNER JOIN pets p ON p.pet_id = t.treatment_pet_id
+    INNER JOIN client c ON c.client_id = p.pet_client_id
+    WHERE c.client_login_id = '{$login_id}'";
     $stmt = $mysqli->prepare($query);
     $stmt->execute();
     $stmt->bind_result($treatments);
@@ -119,7 +122,11 @@ if ($login_rank == 'Admin') {
     $stmt->close();
 
     /* Paymenets */
-    $query = "";
+    $query = "SELECT SUM(payment_amount) FROM payments p
+    INNER JOIN treatments t ON t.treatment_id = p.payment_treatment_id
+    INNER JOIN pets p ON p.pet_id = t.treatment_pet_id
+    INNER JOIN client c ON c.client_id = p.pet_client_id
+    WHERE c.client_login_id = '{$login_id}'";
     $stmt = $mysqli->prepare($query);
     $stmt->execute();
     $stmt->bind_result($payments);
