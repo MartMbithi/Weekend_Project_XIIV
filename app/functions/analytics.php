@@ -65,10 +65,64 @@
  *
  */
 
-/* Clinical Officers */
-$query = "";
-$stmt = $mysqli->prepare($query);
-$stmt->execute();
-$stmt->bind_result($clinical_officers);
-$stmt->fetch();
-$stmt->close();
+$login_rank = mysqli_real_escape_string($mysqli, $_SESSION['login_rank']);
+$login_id = mysqli_real_escape_string($mysqli, $_SESSION['login_id']);
+
+if ($login_rank == 'Admin') {
+
+    /* Doctors */
+    $query = "";
+    $stmt = $mysqli->prepare($query);
+    $stmt->execute();
+    $stmt->bind_result($docs);
+    $stmt->fetch();
+    $stmt->close();
+
+    /* Clients */
+    $query = "";
+    $stmt = $mysqli->prepare($query);
+    $stmt->execute();
+    $stmt->bind_result($clients);
+    $stmt->fetch();
+    $stmt->close();
+
+    /* Pets */
+    $query = "";
+    $stmt = $mysqli->prepare($query);
+    $stmt->execute();
+    $stmt->bind_result($pets);
+    $stmt->fetch();
+    $stmt->close();
+
+    /* Treatments */
+    $query = "";
+    $stmt = $mysqli->prepare($query);
+    $stmt->execute();
+    $stmt->bind_result($treatments);
+    $stmt->fetch();
+    $stmt->close();
+
+    /* Paymenets */
+    $query = "";
+    $stmt = $mysqli->prepare($query);
+    $stmt->execute();
+    $stmt->bind_result($payments);
+    $stmt->fetch();
+    $stmt->close();
+} else {
+    /* Treatments */
+    $query = "";
+    $stmt = $mysqli->prepare($query);
+    $stmt->execute();
+    $stmt->bind_result($treatments);
+    $stmt->fetch();
+    $stmt->close();
+
+    /* Paymenets */
+    $query = "";
+    $stmt = $mysqli->prepare($query);
+    $stmt->execute();
+    $stmt->bind_result($payments);
+    $stmt->fetch();
+    $stmt->close();
+}
