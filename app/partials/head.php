@@ -18,6 +18,10 @@
     <!-- Alerts -->
     <link href="../public/vendor/sweetalert2/sweetalert2.min.css" rel="stylesheet">
     <link href="../public/vendor/toastr/toastr.min.css" rel="stylesheet">
+    <!-- Datatable -->
+    <link href="../public/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+    <!-- Data Table CDN -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css" />
     <!-- Pop Alerts On Session -->
     <?php
     /* Alert Sesion Via Alerts */

@@ -9,7 +9,29 @@
 <!-- Toastr -->
 <script src="../public/vendor/sweetalert2/sweetalert2.min.js"></script>
 <script src="../public/vendor/toastr/toastr.min.js"></script>
-
+<!-- Data Table Export -->
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script>
+<!-- Init Light Gallery  -->
+<script>
+    $('#lightgallery').lightGallery({
+        thumbnail: true,
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $('.report_table').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+    });
+</script>
 <!-- Init Alerts -->
 <?php if (isset($success)) { ?>
     <!-- Pop Success Alert -->
