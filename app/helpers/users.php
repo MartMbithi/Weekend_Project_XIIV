@@ -67,21 +67,6 @@
 
 /* Update Profile Details */
 if (isset($_POST['Update_Profile'])) {
-    $officer_names = mysqli_real_escape_string($mysqli, $_POST['officer_names']);
-    $officer_email = mysqli_real_escape_string($mysqli, $_POST['officer_email']);
-    $officer_contacts = mysqli_real_escape_string($mysqli, $_POST['officer_contacts']);
-    $officer_address = mysqli_real_escape_string($mysqli, $_POST['officer_address']);
-    $officer_login_id = mysqli_real_escape_string($mysqli, $_SESSION['login_id']);
-
-    /* Persit */
-    $update_officer = "UPDATE clinical_officer SET officer_names = '{$officer_names}', officer_email = '{$officer_email}',
-    officer_contacts = '{$officer_contacts}', officer_address = '{$officer_address}' WHERE officer_login_id = '{$officer_login_id}'";
-
-    if (mysqli_query($mysqli, $update_officer)) {
-        $success = "Details updated";
-    } else {
-        $err = "Failed, please try again";
-    }
 }
 
 /* Update Passwords Details */
@@ -108,30 +93,30 @@ if (isset($_POST['Update_Auth_Details'])) {
 }
 
 
-/* Add User */
-if (isset($_POST['Add_Officer'])) {
-    $officer_names = mysqli_real_escape_string($mysqli, $_POST['officer_names']);
-    $officer_email = mysqli_real_escape_string($mysqli, $_POST['officer_email']);
-    $officer_contacts = mysqli_real_escape_string($mysqli, $_POST['officer_contacts']);
-    $officer_address = mysqli_real_escape_string($mysqli, $_POST['officer_address']);
+/* Add Doctir */
+if (isset($_POST['Add_Doctor'])) {
+    $doctor_name = mysqli_real_escape_string($mysqli, $_POST['doctor_name']);
+    $doctor_email = mysqli_real_escape_string($mysqli, $_POST['doctor_email']);
+    $doctor_contacts = mysqli_real_escape_string($mysqli, $_POST['doctor_contacts']);
+    $doctor_address = mysqli_real_escape_string($mysqli, $_POST['doctor_address']);
     $login_password = sha1(md5(mysqli_real_escape_string($mysqli, $_POST['login_password'])));
     $login_rank = mysqli_real_escape_string($mysqli, $_POST['login_rank']);
 
     /* Persist Login */
-    $duplication_checker = "SELECT * FROM login WHERE login_username = '{$officer_email}'";
+    $duplication_checker = "SELECT * FROM login WHERE doctor_email = '{$doctor_email}'";
     $res = mysqli_query($mysqli, $duplication_checker);
     if (mysqli_num_rows($res) > 0) {
         $err = "An account with this email already exists";
     } else {
         /* Persist */
-        $add_officer_auth = "INSERT INTO login (login_username, login_password, login_rank)
-         VALUES('{$officer_email}', '{$login_password}', '{$login_rank}')";
+        $add_officer_auth = "INSERT INTO login (doctor_email, login_password, login_rank)
+         VALUES('{$doctor_email}', '{$login_password}', '{$login_rank}')";
 
         if (mysqli_query($mysqli, $add_officer_auth)) {
             $officer_login_id = mysqli_real_escape_string($mysqli, mysqli_insert_id($mysqli));
 
-            $add_officer_sql = "INSERT INTO clinical_officer (officer_login_id, officer_number, officer_names, officer_email, officer_contacts, officer_address)
-            VALUES('{$officer_login_id}', '{$sys_gen_unique_id}', '{$officer_names}', '{$officer_email}', '{$officer_contacts}', '{$officer_address}')";
+            $add_officer_sql = "INSERT INTO veterinary_doctor (doctor_login_id, doctor_name, doctor_email, doctor_contacts, doctor_address)
+            VALUES('{$officer_login_id}', '{$doctor_name}', '{$doctor_email}', '{$doctor_contacts}', '{$doctor_address}')";
 
             if (mysqli_query($mysqli, $add_officer_sql)) {
                 $success = "Account created";
