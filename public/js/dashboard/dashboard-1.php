@@ -27,11 +27,11 @@
           },
           dataLabels: {
             formatter(val, opts) {
-              const name = opts.w.globals.labels[opts.seriesIndex];
+              const name = ["Cash", "Mpesa", "Bank Deposits", "Debit / Credit Cards"];
               return [val.toFixed() + "%"];
             },
             dropShadow: {
-              enabled: false,
+              enabled: true,
             },
             style: {
               fontSize: "15px",
