@@ -138,3 +138,19 @@ if (isset($_POST['Add_Payment'])) {
         $err = "Failed, please try again";
     }
 }
+
+/* Delete Payments */
+if (isset($_POST['Delete_Payment'])) {
+    $payment_id = mysqli_real_escape_string($mysqli, $_POST['payment_id']);
+    $payment_treatment_id = mysqli_real_escape_string($mysqli, $POST['payment_treatment_id']);
+
+    /* Delete & Roll Back */
+    $delete_sql = "DELETE FROM payments WHERE payment_id = '{$payment_id}'";
+    $update_sql = "UPDATE treatments SET treatment_status = 'Pending' WHERE treatment_id = '{$treatment_id}'";
+
+    if (mysqli_query($mysqli, $update_sql) && mysqli_query($mysqli, $delete_sql)) {
+        $success = "Payment deleted";
+    } else {
+        $err = "Failed, please try again";
+    }
+}
