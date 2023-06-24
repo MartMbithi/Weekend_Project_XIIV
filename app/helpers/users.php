@@ -153,21 +153,6 @@ if (isset($_POST['Update_Officer'])) {
 }
 
 
-/* Delete Doc */
-if (isset($_POST['Delete_Doctor'])) {
-    $doctor_login_id = mysqli_real_escape_string($mysqli, $_POST['doctor_login_id']);
-
-    /* Persist */
-    $delete_officer_sql = "DELETE FROM login WHERE login_id = '{$doctor_login_id}'";
-
-    if (mysqli_query($mysqli, $delete_officer_sql)) {
-        $success = "Details deleted";
-    } else {
-        $err = "Failed, please try again";
-    }
-}
-
-
 /* Add Clients */
 if (isset($_POST['Add_Client'])) {
     $client_name = mysqli_real_escape_string($mysqli, $_POST['client_name']);
@@ -226,14 +211,18 @@ if (isset($_POST['Update_Client'])) {
     }
 }
 
-/* Delete Client */
-if (isset($_POST['Delete_Client'])) {
+
+
+/* **************************************************************** */
+
+/* Global Delete User */
+if (isset($_POST['Delete_User'])) {
     $login_id = mysqli_real_escape_string($mysqli, $_POST['login_id']);
 
     /* Persit */
     $delete_donor_sql = "DELETE FROM login WHERE login_id = '{$login_id}'";
     if (mysqli_query($mysqli, $delete_donor_sql)) {
-        $success = "Client deleted";
+        $success = "Account deleted";
     } else {
         $err = "Failed, please try again";
     }

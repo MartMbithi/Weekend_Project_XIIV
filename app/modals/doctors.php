@@ -62,9 +62,9 @@
                     <h4>Delete <?php echo $rows['doctor_name']; ?> details?</h4>
                     <br>
                     <!-- Hide This -->
-                    <input type="hidden" name="doctor_login_id" value="<?php echo $rows['doctor_login_id']; ?>">
+                    <input type="hidden" name="login_id" value="<?php echo $rows['doctor_login_id']; ?>">
                     <button type="button" class="text-center btn btn-success" data-dismiss="modal">No</button>
-                    <button type="submit" name="Delete_Doctor" class="text-center btn btn-danger">Yes, Delete</button>
+                    <button type="submit" name="Delete_User" class="text-center btn btn-danger">Yes, Delete</button>
                 </div>
             </form>
         </div>
