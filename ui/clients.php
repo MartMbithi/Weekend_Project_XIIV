@@ -141,7 +141,7 @@ require_once('../app/partials/head.php');
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="">Contacts</label>
-                                            <input type="text" required name="client_contacts" class="form-control">
+                                            <input type="text" required name="client_contact" class="form-control">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="">Address</label>
@@ -198,7 +198,7 @@ require_once('../app/partials/head.php');
                                                         <td>
                                                             <?php echo $rows['client_email']; ?>
                                                         </td>
-                                                        <td><?php echo $rows['client_contacts']; ?></td>
+                                                        <td><?php echo $rows['client_contact']; ?></td>
                                                         <td><?php echo $rows['client_address']; ?></td>
                                                         <td>
                                                             <div class="d-flex">

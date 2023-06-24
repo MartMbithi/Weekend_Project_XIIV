@@ -1,5 +1,5 @@
 <!-- Edit Modal -->
-<div class="modal fade fixed-right" id="edit_<?php echo $rows['doctor_id']; ?>" role="dialog" aria-hidden="true">
+<div class="modal fade fixed-right" id="edit_<?php echo $rows['client_id']; ?>" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header align-items-center">
@@ -24,7 +24,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="">Contacts</label>
-                            <input type="text" required name="client_contacts" value="<?php echo $rows['client_contacts']; ?>" class="form-control">
+                            <input type="text" required name="client_contact" value="<?php echo $rows['client_contact']; ?>" class="form-control">
                         </div>
                         <div class="form-group col-md-12">
                             <label for="">Address</label>
