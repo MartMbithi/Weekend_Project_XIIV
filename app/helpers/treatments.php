@@ -114,7 +114,7 @@ if (isset($_POST['Add_Payment'])) {
     /* Save Payment */
     $add_sql = "INSERT INTO payments (payment_treatment_id, payment_ref_code, payment_amount, payment_means)
     VALUES('{$payment_treatment_id}', '{$payment_ref_code}', '{$payment_amount}', '{$payment_means}')";
-    $update_sql = "UPDATE treatments SET treatment_status = 'Paid' WHERE treatment_id = '{$treatment_id}'";
+    $update_sql = "UPDATE treatments SET treatment_status = 'Paid' WHERE treatment_id = '{$payment_treatment_id}'";
 
     if (mysqli_query($mysqli, $add_sql) && mysqli_query($mysqli, $update_sql)) {
         $success = "Payment Posted";

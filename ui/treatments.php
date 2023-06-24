@@ -133,6 +133,7 @@ require_once('../app/partials/head.php');
                                                 <th>Doctor</th>
                                                 <th>Date</th>
                                                 <th>Cost</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -162,8 +163,19 @@ require_once('../app/partials/head.php');
                                                         </td>
                                                         <td><?php echo date('d M Y', strtotime($rows['treatment_date'])); ?></td>
                                                         <td>Ksh <?php echo number_format($rows['treatment_cost']); ?></td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <?php if ($rows['treatment_status'] == 'Pending') { ?>
+                                                                    <a data-toggle="modal" href="#pay_<?php echo $rows['treatment_id']; ?>" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-money"></i></a>
+                                                                <?php } ?>
+                                                                <a data-toggle="modal" href="#eye_<?php echo $rows['treatment_id']; ?>" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-eye"></i></a>
+                                                                <a data-toggle="modal" href="#edit_<?php echo $rows['treatment_id']; ?>" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
+                                                                <a data-toggle="modal" href="#delete_<?php echo $rows['treatment_id']; ?>" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                                            </div>
+                                                        </td>
                                                     </tr>
                                             <?php
+                                                    include('../app/modals/treatments.php');
                                                 }
                                             } ?>
                                         </tbody>

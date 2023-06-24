@@ -157,7 +157,7 @@ require_once('../app/partials/head.php');
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-4  col-sm-4">
+                            <div class="col-xl-8  col-sm-8">
                                 <div class="card border border-danger">
                                     <div class="card-body">
                                         <div class="media align-items-center">
@@ -189,6 +189,7 @@ require_once('../app/partials/head.php');
                                                     <th>Doctor</th>
                                                     <th>Date</th>
                                                     <th>Cost</th>
+                                                    <th>Payment Status</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -218,6 +219,19 @@ require_once('../app/partials/head.php');
                                                             </td>
                                                             <td><?php echo date('d M Y', strtotime($rows['treatment_date'])); ?></td>
                                                             <td>Ksh <?php echo number_format($rows['treatment_cost']); ?></td>
+                                                            <td>
+                                                                <?php if ($rows['treatment_status'] == 'Paid') { ?>
+                                                                    <span class="badge badge-outline-success">
+                                                                        <i class="fa fa-check text-success mr-1"></i>
+                                                                        Paid
+                                                                    </span>
+                                                                <?php } else { ?>
+                                                                    <span class="badge badge-outline-danger">
+                                                                        <i class="fa fa-times text-danger mr-1"></i>
+                                                                        Un Paid
+                                                                    </span>
+                                                                <?php } ?>
+                                                            </td>
                                                         </tr>
                                                 <?php
                                                     }
