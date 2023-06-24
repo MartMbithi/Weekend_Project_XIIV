@@ -114,3 +114,19 @@ if (isset($_POST['Add_Pet'])) {
     }
 }
 
+/* Add Pet Treatment */
+if (isset($_POST['Add_Treatment'])) {
+    $treatment_pet_id = mysqli_real_escape_string($mysqli, $_POST['treatment_pet_id']);
+    $treatment_details = mysqli_real_escape_string($mysqli, $_POST['treatment_details']);
+    $treatment_doctor_id = mysqli_real_escape_string($mysqli, $_POST['treatment_doctor_id']);
+    $treatment_date = mysqli_real_escape_string($mysqli, $_POST['treatment_date']);
+    $treatment_cost = mysqli_real_escape_string($mysqli, $_POST['treatment_cost']);
+
+    /* Persist */
+    $add_sql = "INSERT INTO treatments (treatment_pet_id, treatment_details, treatment_doctor_id, treatment_date, treatment_cost)
+    VALUES('{$treatment_pet_id}', '{$treatment_details}', '{$treatment_doctor_id}', '{$treatment_date}', '{$treatment_cost}')";
+
+    if (mysqli_query($mysqli, $add_sql)) {
+        $success = "Treatment record posted";
+    }
+}

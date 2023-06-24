@@ -67,7 +67,7 @@
 session_start();
 require_once('../app/config/config.php');
 require_once('../app/config/checklogin.php');
-require_once('../app/helpers/pets.php');
+require_once('../app/helpers/treatments.php');
 require_once('../app/partials/head.php');
 ?>
 
@@ -109,67 +109,11 @@ require_once('../app/partials/head.php');
             <div class="container-fluid">
                 <div class="form-head align-items-center d-flex mb-sm-4 mb-3">
                     <div class="mr-auto">
-                        <h2 class="text-black font-w600">Pets</h2>
-                        <p class="mb-0">Manage vet clinic clients pets</p>
-                    </div>
-                    <div>
-                        <a href="javascript:void(0)" class="btn btn-primary mr-3" data-toggle="modal" data-target="#add_modal">+ New Pet</a>
+                        <h2 class="text-black font-w600">Treatment Records</h2>
+                        <p class="mb-0">Manage vet clinic pets treatments</p>
                     </div>
                 </div>
-                <!-- Add Modal -->
-                <div class="modal fade fixed-right" id="add_modal" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header align-items-center">
-                                <div class="text-center">
-                                    <h6 class="mb-0 text-bold">Register New Pet</h6>
-                                </div>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form class="needs-validation" method="post" enctype="multipart/form-data" role="form">
-                                    <div class="row">
-                                        <div class="form-group col-md-12">
-                                            <label for="">Pet owner</label>
-                                            <select type="text" required name="pet_client_id" class="form-control">
-                                                <option value="">Select pet owner</option>
-                                                <?php
-                                                $fetch_records_sql = mysqli_query(
-                                                    $mysqli,
-                                                    "SELECT * FROM client"
-                                                );
-                                                if (mysqli_num_rows($fetch_records_sql) > 0) {
-                                                    while ($rows = mysqli_fetch_array($fetch_records_sql)) {
-                                                ?>
-                                                        <option value="<?php echo $rows['client_id']; ?>"><?php echo $rows['client_name']; ?></option>
-                                                <?php }
-                                                } ?>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="">Pet name</label>
-                                            <input type="text" required name="pet_name" class="form-control">
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="">Pet breed</label>
-                                            <input type="text" required name="pet_breed" class="form-control">
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="">Pet age</label>
-                                            <input type="text" required name="pet_age" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="text-right">
-                                        <button type="submit" name="Add_Pet" class="btn btn-outline-danger">Save</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Modal -->
+
 
                 <!-- row -->
 
@@ -216,7 +160,6 @@ require_once('../app/partials/head.php');
                                                         <td><?php echo $rows['pet_age']; ?></td>
                                                         <td>
                                                             <div class="d-flex">
-                                                                <a data-toggle="modal" href="#treatment_<?php echo $rows['pet_id']; ?>" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-plus"></i></a>
                                                                 <a data-toggle="modal" href="#edit_<?php echo $rows['pet_id']; ?>" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
                                                                 <a data-toggle="modal" href="#delete_<?php echo $rows['pet_id']; ?>" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
                                                             </div>
