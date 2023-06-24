@@ -140,7 +140,7 @@ if ($login_rank == 'Admin') {
     $query = "SELECT SUM(payment_amount) FROM payments WHERE payment_means = 'Bank Transfer'";
     $stmt = $mysqli->prepare($query);
     $stmt->execute();
-    $stmt->bind_result($bank);
+    $stmt->bind_result($row_bank);
     $stmt->fetch();
     $stmt->close();
     if ($row_bank > 0) {
