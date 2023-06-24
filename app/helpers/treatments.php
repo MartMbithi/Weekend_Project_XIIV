@@ -100,6 +100,11 @@ if (isset($_POST['Update_Treatment'])) {
         $err = "Failed, please try again";
     }
 }
+
+
+
+
+
 /* Delete Treatment */
 if (isset($_POST['Delete_Treatment'])) {
     $treatment_id  = mysqli_real_escape_string($mysqli, $_POST['treatment_id']);
@@ -109,6 +114,25 @@ if (isset($_POST['Delete_Treatment'])) {
 
     if (mysqli_query($mysqli, $delete_sql)) {
         $success = "Treatment deleted";
+    } else {
+        $err = "Failed, please try again";
+    }
+}
+
+
+/* Pay Treatment */
+if (isset($_POST[''])) {
+    $payment_treatment_id = mysqli_real_escape_string($mysqli, $_POST['treatment_id']);
+    $payment_ref_code = mysqli_real_escape_string($mysqli, substr(str_shuffle("QWERTYUIOPLKJHGFDSAZXCVBNM1234567890"), 1, 10));
+    $payment_amount = mysqli_real_escape_string($mysqli, $_POST['payment_amount']);
+    $payment_means = mysqli_real_escape_string($mysqli, $_POST['payment_means']);
+
+    /* Save Payment */
+    $add_sql = "INSERT INTO payments (payment_treatment_id, payment_ref_code, payment_amount, payment_means)
+    VALUES('{$payment_treatment_id}', '{$payment_ref_code}', '{$payment_amount}', '{$payment_means}')";
+
+    if (mysqli_query($mysqli, $add_sql)) {
+        $success = "Payment Posted";
     } else {
         $err = "Failed, please try again";
     }
