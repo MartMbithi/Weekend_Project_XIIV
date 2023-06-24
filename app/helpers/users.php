@@ -103,13 +103,13 @@ if (isset($_POST['Add_Doctor'])) {
     $login_rank = mysqli_real_escape_string($mysqli, $_POST['login_rank']);
 
     /* Persist Login */
-    $duplication_checker = "SELECT * FROM login WHERE doctor_email = '{$doctor_email}'";
+    $duplication_checker = "SELECT * FROM login WHERE login_email = '{$doctor_email}'";
     $res = mysqli_query($mysqli, $duplication_checker);
     if (mysqli_num_rows($res) > 0) {
         $err = "An account with this email already exists";
     } else {
         /* Persist */
-        $add_officer_auth = "INSERT INTO login (doctor_email, login_password, login_rank)
+        $add_officer_auth = "INSERT INTO login (login_email, login_password, login_rank)
          VALUES('{$doctor_email}', '{$login_password}', '{$login_rank}')";
 
         if (mysqli_query($mysqli, $add_officer_auth)) {
@@ -143,7 +143,7 @@ if (isset($_POST['Update_Officer'])) {
     doctor_contacts = '{$doctor_contacts}', doctor_address = '{$doctor_address}'
     WHERE doctor_login_id = '{$doctor_login_id}'";
 
-    $login_rank_sql = "UPDATE login SET login_rank = '{$login_rank}' WHERE login_id = '{$officer_login_id}'";
+    $login_rank_sql = "UPDATE login SET login_rank = '{$login_rank}' WHERE login_id = '{$doctor_login_id}'";
 
     if (mysqli_query($mysqli, $update_officer) && mysqli_query($mysqli, $login_rank_sql)) {
         $success = "Details updated";
@@ -153,8 +153,8 @@ if (isset($_POST['Update_Officer'])) {
 }
 
 
-/* Delete Officer */
-if (isset($_POST['Delete_Officer'])) {
+/* Delete Doc */
+if (isset($_POST['Delete_Doctor'])) {
     $doctor_login_id = mysqli_real_escape_string($mysqli, $_POST['doctor_login_id']);
 
     /* Persist */
