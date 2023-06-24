@@ -114,17 +114,27 @@ if ($login_rank == 'Admin') {
     $query = "SELECT SUM(payment_amount) FROM payments WHERE payment_means = 'Cash'";
     $stmt = $mysqli->prepare($query);
     $stmt->execute();
-    $stmt->bind_result($cash);
+    $stmt->bind_result($row_cash);
     $stmt->fetch();
     $stmt->close();
+    if ($row_cash > 0) {
+        $cash = $row_cash;
+    } else {
+        $cash = 0;
+    }
 
     /* Mpesa Payments  */
     $query = "SELECT SUM(payment_amount) FROM payments WHERE payment_means = 'Mobile Money - Mpesa'";
     $stmt = $mysqli->prepare($query);
     $stmt->execute();
-    $stmt->bind_result($mpesa);
+    $stmt->bind_result($row_mpesa);
     $stmt->fetch();
     $stmt->close();
+    if ($row_mpesa > 0) {
+        $mpesa = $row_mpesa;
+    } else {
+        $mpesa = 0;
+    }
 
     /* Bank Wire Payments */
     $query = "SELECT SUM(payment_amount) FROM payments WHERE payment_means = 'Bank Transfer'";
@@ -133,14 +143,24 @@ if ($login_rank == 'Admin') {
     $stmt->bind_result($bank);
     $stmt->fetch();
     $stmt->close();
+    if ($row_bank > 0) {
+        $bank = $row_bank;
+    } else {
+        $bank = 0;
+    }
 
     /* Credit / Debit Card */
     $query = "SELECT SUM(payment_amount) FROM payments WHERE payment_means = 'Credit / Debit Card'";
     $stmt = $mysqli->prepare($query);
     $stmt->execute();
-    $stmt->bind_result($card);
+    $stmt->bind_result($row_card);
     $stmt->fetch();
     $stmt->close();
+    if ($row_card > 0) {
+        $card = $row_card;
+    } else {
+        $card = 0;
+    }
 } else {
     /* Treatments */
     $query = "SELECT COUNT(*) FROM treatments t 
