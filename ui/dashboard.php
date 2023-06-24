@@ -366,7 +366,7 @@ require_once('../app/partials/head.php');
     <script src="../public/vendor/apexchart/apexchart.js"></script>
 
     <!-- Dashboard 1 -->
-    <script src="../public/js/dashboard/dashboard-1.js"></script>
+    <?php require_once('../public/js/dashboard/dashboard-1.php'); ?>
 
 </body>
 
