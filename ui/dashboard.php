@@ -359,6 +359,15 @@ require_once('../app/partials/head.php');
     <!-- Required vendors -->
     <?php require_once('../app/partials/scripts.php'); ?>
 
+    <!-- Chart Scripts -->
+    <script src="../public/vendor/peity/jquery.peity.min.js"></script>
+
+    <!-- Apex Chart -->
+    <script src="../public/vendor/apexchart/apexchart.js"></script>
+
+    <!-- Dashboard 1 -->
+    <script src="../public/js/dashboard/dashboard-1.js"></script>
+
 </body>
 
 </html>

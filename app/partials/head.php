@@ -8,7 +8,10 @@
     <title>Veterinatry Clinic Management System</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../public/images/logo.png">
+    <!-- Core Application Css -->
     <link href="../public/css/style.css" rel="stylesheet">
+    <!-- Chart CSS -->
+    <link rel="stylesheet" href="../public/vendor/chartist/css/chartist.min.css">
     <!-- Datatable -->
     <link href="../public/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
     <!-- Custom Stylesheet -->

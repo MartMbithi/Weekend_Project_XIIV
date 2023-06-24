@@ -2,6 +2,7 @@
 <script src="../public/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
 <script src="../public/js/custom.min.js"></script>
 <script src="../public/js/deznav-init.js"></script>
+<script src="../public/vendor/chart.js/Chart.bundle.min.js"></script>
 
 <!-- Datatable -->
 <script src="../public/vendor/datatables/js/jquery.dataTables.min.js"></script>
