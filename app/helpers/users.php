@@ -65,14 +65,11 @@
  *
  */
 
-/* Update Profile Details */
-if (isset($_POST['Update_Profile'])) {
-}
 
 /* Update Passwords Details */
 if (isset($_POST['Update_Auth_Details'])) {
     $login_id = mysqli_real_escape_string($mysqli, $_SESSION['login_id']);
-    $login_username = mysqli_real_escape_string($mysqli, $_POST['login_username']);
+    $login_email = mysqli_real_escape_string($mysqli, $_POST['login_email']);
     $new_password = sha1(md5(mysqli_real_escape_string($mysqli, $_POST['new_password'])));
     $confirm_password = sha1(md5(mysqli_real_escape_string($mysqli, $_POST['confirm_password'])));
 
@@ -81,7 +78,7 @@ if (isset($_POST['Update_Auth_Details'])) {
         $err = "Please enter matching passwords";
     } else {
         /* Change Passwords */
-        $update_auth = "UPDATE login SET login_username = '{$login_username}', login_password = '{$confirm_password}'
+        $update_auth = "UPDATE login SET login_email = '{$login_email}', login_password = '{$confirm_password}'
         WHERE login_id = '{$login_id}'";
 
         if (mysqli_query($mysqli, $update_auth)) {
