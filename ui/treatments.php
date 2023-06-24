@@ -114,7 +114,6 @@ require_once('../app/partials/head.php');
                     </div>
                 </div>
 
-
                 <!-- row -->
 
                 <div class="row">
@@ -129,19 +128,21 @@ require_once('../app/partials/head.php');
                                     <table id="example3" class="display min-w850">
                                         <thead>
                                             <tr>
-                                                <th>Pet Owner</th>
-                                                <th>Pet Name</th>
-                                                <th>Pet Breed</th>
-                                                <th>Pet Age </th>
-                                                <th>Action</th>
+                                                <th>Client</th>
+                                                <th>Pet</th>
+                                                <th>Doctor</th>
+                                                <th>Date</th>
+                                                <th>Cost</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
                                             $fetch_records_sql = mysqli_query(
                                                 $mysqli,
-                                                "SELECT * FROM pets p
-                                                INNER JOIN client c ON c.client_id = p.pet_client_id"
+                                                "SELECT * FROM treatments t
+                                                INNER JOIN pets p ON p.pet_id = t.treatment_pet_id
+                                                INNER JOIN client c ON c.client_id = p.pet_client_id
+                                                INNER JOIN veterinary_doctor vd ON vd.doctor_id = t.treatment_doctor_id"
                                             );
                                             if (mysqli_num_rows($fetch_records_sql) > 0) {
                                                 while ($rows = mysqli_fetch_array($fetch_records_sql)) {
@@ -149,24 +150,20 @@ require_once('../app/partials/head.php');
                                                     <tr>
                                                         <td>
                                                             Names: <?php echo $rows['client_name']; ?> <br>
-                                                            Contacts: <?php echo $rows['client_contact']; ?>
+                                                            Contact: <?php echo $rows['client_contact']; ?>
                                                         </td>
                                                         <td>
-                                                            <?php echo $rows['pet_name']; ?>
+                                                            Name:<?php echo $rows['pet_name']; ?><br>
+                                                            Breed: <?php echo $rows['pet_breed']; ?>
                                                         </td>
                                                         <td>
-                                                            <?php echo $rows['pet_breed']; ?>
+                                                            Names: <?php echo $rows['doctor_name']; ?> <br>
+                                                            Contact: <?php echo $rows['doctor_contacts']; ?>
                                                         </td>
-                                                        <td><?php echo $rows['pet_age']; ?></td>
-                                                        <td>
-                                                            <div class="d-flex">
-                                                                <a data-toggle="modal" href="#edit_<?php echo $rows['pet_id']; ?>" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                                                                <a data-toggle="modal" href="#delete_<?php echo $rows['pet_id']; ?>" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                                            </div>
-                                                        </td>
+                                                        <td><?php echo date('d M Y', strtotime($rows['treatment_date'])); ?></td>
+                                                        <td>Ksh <?php echo number_format($rows['treatment_cost']); ?></td>
                                                     </tr>
                                             <?php
-                                                    include('../app/modals/pets.php');
                                                 }
                                             } ?>
                                         </tbody>
