@@ -126,21 +126,21 @@ require_once('../app/partials/head.php');
                                 <div class="profile card card-body px-3 pt-3 pb-0">
                                     <div class="profile-head">
                                         <div class="photo-content">
-                                            <div style="background-size: cover; background-position: center; min-height: 250px;
-                                            width: 100%;background: url(../public/landing/images/home_1_slider_1.jpg);">
+                                            <div style="background: url(../public/images/banner3.jpg); background-size: cover; background-position: center; min-height: 250px;
+                                            width: 100%;">
                                             </div>
                                         </div>
                                         <div class="profile-info">
                                             <div class="profile-photo">
-                                                <img src="../public/backoffice/images/profile/no-profile.png" class="img-fluid rounded-circle" alt="">
+                                                <img src="../public/images/profile.png" class="img-fluid rounded-circle" alt="">
                                             </div>
                                             <div class="profile-details">
                                                 <div class="profile-name px-3 pt-2">
-                                                    <h4 class="text-primary mb-0"><?php echo $rows['officer_names']; ?></h4>
+                                                    <h4 class="text-primary mb-0"><?php echo $rows['doctor_name']; ?></h4>
                                                     <p><?php echo $rows['login_rank']; ?></p>
                                                 </div>
                                                 <div class="profile-email px-2 pt-2">
-                                                    <h4 class="text-muted mb-0"><?php echo $rows['officer_email']; ?></h4>
+                                                    <h4 class="text-muted mb-0"><?php echo $rows['doctor_email']; ?></h4>
                                                     <p>Email</p>
                                                 </div>
                                             </div>
@@ -175,23 +175,28 @@ require_once('../app/partials/head.php');
                                                             <div class="row">
                                                                 <div class="form-group col-md-6">
                                                                     <label for="">Full names</label>
-                                                                    <input type="text" required name="officer_names" value="<?php echo $rows['officer_names']; ?>" class="form-control">
+                                                                    <input type="hidden" required name="doctor_login_id" value="<?php echo $rows['doctor_login_id']; ?>" class="form-control">
+                                                                    <input type="text" required name="doctor_name" value="<?php echo $rows['doctor_name']; ?>" class="form-control">
                                                                 </div>
                                                                 <div class="form-group col-md-6">
                                                                     <label for="">Contacts</label>
-                                                                    <input type="text" required name="officer_contacts" value="<?php echo $rows['officer_contacts']; ?>" class="form-control">
+                                                                    <input type="text" required name="doctor_contacts" value="<?php echo $rows['doctor_contacts']; ?>" class="form-control">
                                                                 </div>
                                                                 <div class="form-group col-md-6">
                                                                     <label for="">Email</label>
-                                                                    <input type="text" required name="officer_email" value="<?php echo $rows['officer_email']; ?>" class="form-control">
+                                                                    <input type="text" required name="doctor_email" value="<?php echo $rows['doctor_email']; ?>" class="form-control">
                                                                 </div>
                                                                 <div class="form-group col-md-6">
+                                                                    <label for="">Access Level</label>
+                                                                    <input readonly type="text" required name="login_rank" value="<?php echo $rows['login_rank']; ?>" class="form-control">
+                                                                </div>
+                                                                <div class="form-group col-md-12">
                                                                     <label for="">Adddress</label>
-                                                                    <input type="text" required name="officer_address" value="<?php echo $rows['officer_address']; ?>" class="form-control">
+                                                                    <input type="text" required name="doctor_address" value="<?php echo $rows['doctor_address']; ?>" class="form-control">
                                                                 </div>
                                                             </div>
                                                             <div class="text-right">
-                                                                <button type="submit" name="Update_Profile" class="btn btn-outline-danger">Update Profile</button>
+                                                                <button type="submit" name="Update_Officer" class="btn btn-outline-danger">Save</button>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -203,7 +208,7 @@ require_once('../app/partials/head.php');
                                                             <div class="row">
                                                                 <div class="form-group col-md-12">
                                                                     <label for="">Login Username</label>
-                                                                    <input type="email" required name="login_username" value="<?php echo $rows['login_username']; ?>" class="form-control">
+                                                                    <input type="email" required name="login_email" value="<?php echo $rows['login_email']; ?>" class="form-control">
                                                                 </div>
                                                                 <div class="form-group col-md-6">
                                                                     <label for="">New Password</label>

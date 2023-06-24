@@ -19,7 +19,7 @@ require_once('../app/partials/head.php');
                                         <a href=""><img src="../public/images/logo-full.png" alt=""></a>
                                     </div>
                                     <h4 class="text-center mb-4 text-white">
-                                        Veterinatry Clininc Management System <br>
+                                        Veterinary Clininc Management System <br>
                                         Confirm Password
                                     </h4>
                                     <hr>
@@ -33,7 +33,7 @@ require_once('../app/partials/head.php');
                                             <input required type="password" name="new_password" class="form-control">
                                         </div>
                                         <div class="text-center">
-                                            <button type="submit" name="Reset_Password_1" class="btn bg-white text-primary btn-block">Reset Password</button>
+                                            <button type="submit" name="Reset_Password_Step_2" class="btn bg-white text-primary btn-block">Reset Password</button>
                                         </div>
                                     </form>
                                 </div>

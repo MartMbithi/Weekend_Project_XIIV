@@ -20,7 +20,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="">Contacts</label>
-                            <input type="text" required name="doctor_contact" value="<?php echo $rows['doctor_contact']; ?>" class="form-control">
+                            <input type="text" required name="doctor_contacts" value="<?php echo $rows['doctor_contacts']; ?>" class="form-control">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="">Email</label>

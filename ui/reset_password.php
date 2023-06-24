@@ -19,7 +19,7 @@ require_once('../app/partials/head.php');
                                         <a href=""><img src="../public/images/logo-full.png" alt=""></a>
                                     </div>
                                     <h4 class="text-center mb-4 text-white">
-                                        Veterinatry Clininc Management System <br>
+                                        Veterinary Clininc Management System <br>
                                         Reset Password
                                     </h4>
                                     <hr>

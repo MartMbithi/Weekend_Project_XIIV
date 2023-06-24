@@ -139,6 +139,7 @@ if (isset($_POST['Reset_Password_1'])) {
     $res = mysqli_query($mysqli, $username_checker);
     if (mysqli_num_rows($res) > 0) {
         /* Redirect to reset password step 2 */
+        $_SESSION['login_email'] = $login_email;
         $_SESSION['success'] = "Login username verified, proceed to reset password";
         header('Location: confirm_password');
         exit;
@@ -149,7 +150,7 @@ if (isset($_POST['Reset_Password_1'])) {
 
 /* Reset Password Step 2 */
 if (isset($_POST['Reset_Password_Step_2'])) {
-    $login_email = mysqli_real_escape_string($mysqli, $_SESSION['login_email']);
+    $login_email = mysqli_real_escape_string($mysqli, $_POST['login_email']);
     $new_password = sha1(md5(mysqli_real_escape_string($mysqli, $_POST['new_password'])));
     $confirm_password = sha1(md5(mysqli_real_escape_string($mysqli, $_POST['confirm_password'])));
 
