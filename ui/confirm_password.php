@@ -5,7 +5,7 @@ require_once('../app/helpers/auth.php');
 require_once('../app/partials/head.php');
 ?>
 
-<body class="h-100" style="background-size: cover; background-position: center; min-height: 250px; width: 100%;background: url(../public/images/banner3.jpg);">
+<body class="h-100" style="background: url(../public/images/banner3.jpg); background-size: cover;   background-repeat: no-repeat, repeat; background-position: center;">
     <div class="authincation h-100">
         <div class="container h-100">
             <br>
