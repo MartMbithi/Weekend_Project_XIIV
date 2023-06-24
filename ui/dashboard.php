@@ -241,13 +241,14 @@ require_once('../app/partials/head.php');
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-12 col-xxl-12 col-md-12">
+                            <!-- Revenue Summary -->
+                            <div class="col-xl-6 col-xxl-6 col-md-6">
                                 <div class="card">
                                     <div class="card-header border-0 pb-0">
                                         <h4 class="card-title">Revenue / Payment Summary</h4>
                                     </div>
                                     <div class="card-body">
-                                        <table id="example3" class="display min-w850">
+                                        <table id="example3" class="display">
                                             <thead>
                                                 <tr>
                                                     <th>REF #</th>
@@ -267,7 +268,7 @@ require_once('../app/partials/head.php');
                                                 ?>
                                                         <tr>
                                                             <td><?php echo $rows['payment_ref_code']; ?></td>
-                                                            <td><?php echo number_format($rows['payment_amount']); ?></td>
+                                                            <td>Ksh <?php echo number_format($rows['payment_amount']); ?></td>
                                                             <td><?php echo date('d M Y', strtotime($rows['payment_date'])); ?></td>
                                                             <td><?php echo $rows['payment_means']; ?></td>
                                                         </tr>
@@ -279,6 +280,48 @@ require_once('../app/partials/head.php');
                                     </div>
                                 </div>
                             </div>
+                            <!-- Revenue Streams Trend -->
+                            <div class="col-xl-6 col-xxl-6 col-md-6">
+                                <div class="card">
+                                    <div class="card-header border-0 pb-0">
+                                        <h4 class="card-title">Revenue Streams Trend</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="donutChart"></div>
+                                        <div class="d-flex justify-content-between mt-4">
+                                            <div class="pr-2">
+                                                <svg width="20" height="8" viewBox="0 0 20 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <rect width="20" height="8" rx="4" fill="#214BB8" />
+                                                </svg>
+                                                <h4 class="fs-18 text-black mb-1 font-w600">Ksh <?php echo number_format($cash); ?></h4>
+                                                <span class="fs-14">Cash</span>
+                                            </div>
+                                            <div class="pr-2">
+                                                <svg width="20" height="8" viewBox="0 0 20 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <rect width="20" height="8" rx="4" fill="#FE634E" />
+                                                </svg>
+                                                <h4 class="fs-18 text-black mb-1 font-w600">Ksh <?php echo number_format($mpesa); ?></h4>
+                                                <span class="fs-14">Mpesa</span>
+                                            </div>
+                                            <div class="">
+                                                <svg width="20" height="8" viewBox="0 0 20 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <rect width="20" height="8" rx="4" fill="#45ADDA" />
+                                                </svg>
+                                                <h4 class="fs-18 text-black mb-1 font-w600">Ksh <?php echo number_format($bank); ?></h4>
+                                                <span class="fs-14">Bank Deposits</span>
+                                            </div>
+                                            <div class="">
+                                                <svg width="20" height="8" viewBox="0 0 20 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <rect width="20" height="8" rx="4" fill="#2bc155" />
+                                                </svg>
+                                                <h4 class="fs-18 text-black mb-1 font-w600">Ksh <?php echo number_format($card); ?></h4>
+                                                <span class="fs-14">Debit / Credit Cards</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Trend -->
                         </div>
                     </div>
                 </div>
