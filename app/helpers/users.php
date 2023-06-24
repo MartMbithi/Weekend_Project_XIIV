@@ -207,107 +207,33 @@ if (isset($_POST['Add_Client'])) {
     }
 }
 
-/* Update Donor */
-if (isset($_POST['Update_Donor'])) {
-    $blood_donor_id = mysqli_real_escape_string($mysqli, $_POST['blood_donor_id']);
-    $blood_donor_names = mysqli_real_escape_string($mysqli, $_POST['blood_donor_names']);
-    $blood_donor_contacts = mysqli_real_escape_string($mysqli, $_POST['blood_donor_contacts']);
-    $blood_donor_address = mysqli_real_escape_string($mysqli, $_POST['blood_donor_address']);
-    $blood_donor_email = mysqli_real_escape_string($mysqli, $_POST['blood_donor_email']);
-    $blood_donor_blood_group = mysqli_real_escape_string($mysqli, $_POST['blood_donor_blood_group']);
+/* Update Client */
+if (isset($_POST['Update_Client'])) {
+    $client_name = mysqli_real_escape_string($mysqli, $_POST['client_name']);
+    $client_email = mysqli_real_escape_string($mysqli, $_POST['client_email']);
+    $client_contact = mysqli_real_escape_string($mysqli, $_POST['client_contact']);
+    $client_address = mysqli_real_escape_string($mysqli, $_POST['client_address']);
+    $client_id = mysqli_real_escape_string($mysqli, $_POST['client_id']);
 
     /* Persist */
-    $update_donor_sql = "UPDATE  blood_donor SET blood_donor_names = '{$blood_donor_names}', blood_donor_contacts = '{$blood_donor_contacts}',
-    blood_donor_address = '{$blood_donor_address}', blood_donor_address  = '{$blood_donor_address}', blood_donor_email = '{$blood_donor_email}',
-    blood_donor_blood_group = '{$blood_donor_blood_group}' WHERE  blood_donor_id = '{$blood_donor_id}'";
+    $update_client_sql = "UPDATE  client SET client_name = '{$client_name}', client_email = '{$client_email}',
+    client_contact = '{$client_contact}', client_address  = '{$client_address}' WHERE  client_id = '{$client_id}'";
 
-    if (mysqli_query($mysqli, $update_donor_sql)) {
-        $success = "Donor details updated";
+    if (mysqli_query($mysqli, $update_client_sql)) {
+        $success = "Client details updated";
     } else {
         $err = "Failed, please try again";
     }
 }
 
-/* Delete Donor */
-if (isset($_POST['Delete_Donor'])) {
+/* Delete Client */
+if (isset($_POST['Delete_Client'])) {
     $login_id = mysqli_real_escape_string($mysqli, $_POST['login_id']);
 
     /* Persit */
     $delete_donor_sql = "DELETE FROM login WHERE login_id = '{$login_id}'";
     if (mysqli_query($mysqli, $delete_donor_sql)) {
-        $success = "Donor deleted";
-    } else {
-        $err = "Failed, please try again";
-    }
-}
-
-/* Add Patient */
-if (isset($_POST['Add_Patient'])) {
-    $patient_names = mysqli_real_escape_string($mysqli, $_POST['patient_names']);
-    $patient_email = mysqli_real_escape_string($mysqli, $_POST['patient_email']);
-    $patient_contacts = mysqli_real_escape_string($mysqli, $_POST['patient_contacts']);
-    $patient_address = mysqli_real_escape_string($mysqli, $_POST['patient_address']);
-    $patient_blood_group = mysqli_real_escape_string($mysqli, $_POST['patient_blood_group']);
-    $login_password = sha1(md5(mysqli_real_escape_string($mysqli, $_POST['login_password'])));
-
-    /* Prevent Duplication */
-    $duplication_checker = "SELECT * FROM login WHERE login_username = '{$patient_email}'";
-    $res = mysqli_query($mysqli, $duplication_checker);
-    if (mysqli_num_rows($res) > 0) {
-        $err = "An account with this email already exists";
-    } else {
-        /* Persist Patient Auth */
-        $add_patient_auth = "INSERT INTO login (login_username, login_password, login_rank)
-        VALUES('{$patient_email}', '{$login_password}', 'Patient')";
-
-        if (mysqli_query($mysqli, $add_patient_auth)) {
-            $patient_login_id = mysqli_real_escape_string($mysqli, mysqli_insert_id($mysqli));
-            /* Persist Patient */
-            $add_patient_sql = "INSERT INTO patient(patient_login_id, patient_names, patient_email, patient_contacts, patient_address, patient_blood_group)
-            VALUES('{$patient_login_id}', '{$patient_names}', '{$patient_email}', '{$patient_contacts}', '{$patient_address}', '{$patient_blood_group}')";
-
-            if (mysqli_query($mysqli, $add_patient_sql)) {
-                $success = "Patient registered";
-            } else {
-                $err = "Failed, please try again";
-            }
-        } else {
-            $err = "Failed, please try again";
-        }
-    }
-}
-
-/* Update Patient */
-if (isset($_POST['Update_Patient'])) {
-    $patient_names = mysqli_real_escape_string($mysqli, $_POST['patient_names']);
-    $patient_email = mysqli_real_escape_string($mysqli, $_POST['patient_email']);
-    $patient_contacts = mysqli_real_escape_string($mysqli, $_POST['patient_contacts']);
-    $patient_address = mysqli_real_escape_string($mysqli, $_POST['patient_address']);
-    $patient_blood_group = mysqli_real_escape_string($mysqli, $_POST['patient_blood_group']);
-    $patient_id = mysqli_real_escape_string($mysqli, $_POST['patient_id']);
-
-    /* Persist */
-    $update_patient_sql = "UPDATE patient SET patient_names = '{$patient_names}', patient_email = '{$patient_email}', 
-    patient_contacts = '{$patient_contacts}', patient_address = '{$patient_address}', patient_blood_group = '{$patient_blood_group}' 
-    WHERE patient_id = '{$patient_id}'";
-
-    if (mysqli_query($mysqli, $update_patient_sql)) {
-        $success = "Patient details updated";
-    } else {
-        $err = "Failed, please try again";
-    }
-}
-
-/* Delete Patient */
-if (isset($_POST['Delete_Patient'])) {
-    $login_id = mysqli_real_escape_string($mysqli, $_POST['login_id']);
-
-
-    /* Delete */
-    $delete_sql = "DELETE FROM login WHERE login_id = '{$login_id}'";
-
-    if (mysqli_query($mysqli, $delete_sql)) {
-        $success = "Patient details deleted";
+        $success = "Client deleted";
     } else {
         $err = "Failed, please try again";
     }
