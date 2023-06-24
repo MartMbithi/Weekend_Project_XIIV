@@ -5,7 +5,7 @@ require_once('../app/helpers/auth.php');
 require_once('../app/partials/head.php');
 ?>
 
-<body class="h-100" style="background-image: url(../public/images/banner3.jpg);">
+<body class="h-100" style="background-size: cover; background-position: center; min-height: 250px; width: 100%;background: url(../public/images/banner3.jpg);">
     <div class="authincation h-100">
         <div class="container h-100">
             <br>
@@ -29,7 +29,7 @@ require_once('../app/partials/head.php');
                                             <input required type="email" name="login_email" class="form-control">
                                         </div>
                                         <div class="text-center">
-                                            <button type="submit" name="Reset_Password_1" class="btn bg-white text-primary btn-block">Reset Passwiord</button>
+                                            <button type="submit" name="Reset_Password_1" class="btn bg-white text-primary btn-block">Reset Password</button>
                                         </div>
                                     </form>
                                     <div class="new-account mt-3">
