@@ -189,7 +189,6 @@ require_once('../app/partials/head.php');
                                                     <th>Doctor</th>
                                                     <th>Date</th>
                                                     <th>Cost</th>
-                                                    <th>Details</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -198,7 +197,8 @@ require_once('../app/partials/head.php');
                                                     $mysqli,
                                                     "SELECT * FROM treatments t
                                                     INNER JOIN pets p ON p.pet_id = t.treatment_pet_id
-                                                    INNER JOIN client c ON c.client_id = p.pet_client_id"
+                                                    INNER JOIN client c ON c.client_id = p.pet_client_id
+                                                    INNER JOIN veterinary_doctor vd ON vd.doctor_id = t.treatment_doctor_id"
                                                 );
                                                 if (mysqli_num_rows($fetch_records_sql) > 0) {
                                                     while ($rows = mysqli_fetch_array($fetch_records_sql)) {
@@ -209,16 +209,15 @@ require_once('../app/partials/head.php');
                                                                 Contact: <?php echo $rows['client_contact']; ?>
                                                             </td>
                                                             <td>
-                                                                Name:<?php echo $rows['pet_name']; ?>
+                                                                Name:<?php echo $rows['pet_name']; ?><br>
                                                                 Breed: <?php echo $rows['pet_breed']; ?>
                                                             </td>
                                                             <td>
                                                                 Names: <?php echo $rows['doctor_name']; ?> <br>
-                                                                Contact: <?php echo $rows['doctor_contact']; ?>
+                                                                Contact: <?php echo $rows['doctor_contacts']; ?>
                                                             </td>
                                                             <td><?php echo date('d M Y', strtotime($rows['treatment_date'])); ?></td>
-                                                            <td><?php echo number_format($rows['treatment_cost']); ?></td>
-                                                            <td><?php echo $rows['treatment_details']; ?></td>
+                                                            <td>Ksh <?php echo number_format($rows['treatment_cost']); ?></td>
                                                         </tr>
                                                 <?php
                                                     }
