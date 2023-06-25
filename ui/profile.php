@@ -97,7 +97,7 @@ require_once('../app/partials/head.php');
             Sidebar end
         ***********************************-->
         <?php
-        if ($_SESSION['login_rank'] == 'Admin') {
+        if ($_SESSION['login_rank'] == 'Admin' || $_SESSION['login_rank'] == 'Doctor' ) {
             $login_id = mysqli_real_escape_string($mysqli, $_SESSION['login_id']);
             $fetch_records_sql = mysqli_query(
                 $mysqli,
