@@ -124,43 +124,86 @@ require_once('../app/partials/head.php');
                             </div> -->
                             <div class="card-body">
                                 <div class="table-responsive">
+                                    <?php if ($_SESSION['login_rank'] == 'Client') { ?>
 
-                                    <table id="example3" class="display min-w850">
-                                        <thead>
-                                            <tr>
-                                                <th>REF #</th>
-                                                <th>Amount</th>
-                                                <th>Date Paid</th>
-                                                <th>Means</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            $fetch_records_sql = mysqli_query(
-                                                $mysqli,
-                                                "SELECT * FROM payments"
-                                            );
-                                            if (mysqli_num_rows($fetch_records_sql) > 0) {
-                                                while ($rows = mysqli_fetch_array($fetch_records_sql)) {
-                                            ?>
-                                                    <tr>
-                                                        <td><?php echo $rows['payment_ref_code']; ?></td>
-                                                        <td>Ksh <?php echo number_format($rows['payment_amount']); ?></td>
-                                                        <td><?php echo date('d M Y', strtotime($rows['payment_date'])); ?></td>
-                                                        <td><?php echo $rows['payment_means']; ?></td>
-                                                        <td>
-                                                            <div class="d-flex">
-                                                                <a data-toggle="modal" href="#delete_<?php echo $rows['payment_id']; ?>" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                            <?php
-                                                    include('../app/modals/payments.php');
-                                                }
-                                            } ?>
-                                        </tbody>
-                                    </table>
+                                        <table id="example3" class="display min-w850">
+                                            <thead>
+                                                <tr>
+                                                    <th>REF #</th>
+                                                    <th>Amount</th>
+                                                    <th>Date Paid</th>
+                                                    <th>Means</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                $fetch_records_sql = mysqli_query(
+                                                    $mysqli,
+                                                    "SELECT * FROM payments p
+                                                    INNER JOIN treatments t ON t.treatment_id = p.payment_treatment_id
+                                                    INNER JOIN pets pe ON pe.pet_id = t.treatment_pet_id
+                                                    INNER JOIN client c ON c.client_id = pe.pet_client_id
+                                                    WHERE c.client_login_id = '{$_SESSION['login_id']}'"
+                                                );
+                                                if (mysqli_num_rows($fetch_records_sql) > 0) {
+                                                    while ($rows = mysqli_fetch_array($fetch_records_sql)) {
+                                                ?>
+                                                        <tr>
+                                                            <td><?php echo $rows['payment_ref_code']; ?></td>
+                                                            <td>Ksh <?php echo number_format($rows['payment_amount']); ?></td>
+                                                            <td><?php echo date('d M Y', strtotime($rows['payment_date'])); ?></td>
+                                                            <td><?php echo $rows['payment_means']; ?></td>
+                                                            <td>
+                                                                <div class="d-flex">
+                                                                    <a data-toggle="modal" href="#delete_<?php echo $rows['payment_id']; ?>" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                <?php
+                                                        include('../app/modals/payments.php');
+                                                    }
+                                                } ?>
+                                            </tbody>
+                                        </table>
+                                    <?php } else { ?>
+                                        <table id="example3" class="display min-w850">
+                                            <thead>
+                                                <tr>
+                                                    <th>REF #</th>
+                                                    <th>Amount</th>
+                                                    <th>Date Paid</th>
+                                                    <th>Means</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                $fetch_records_sql = mysqli_query(
+                                                    $mysqli,
+                                                    "SELECT * FROM payments"
+                                                );
+                                                if (mysqli_num_rows($fetch_records_sql) > 0) {
+                                                    while ($rows = mysqli_fetch_array($fetch_records_sql)) {
+                                                ?>
+                                                        <tr>
+                                                            <td><?php echo $rows['payment_ref_code']; ?></td>
+                                                            <td>Ksh <?php echo number_format($rows['payment_amount']); ?></td>
+                                                            <td><?php echo date('d M Y', strtotime($rows['payment_date'])); ?></td>
+                                                            <td><?php echo $rows['payment_means']; ?></td>
+                                                            <td>
+                                                                <div class="d-flex">
+                                                                    <a data-toggle="modal" href="#delete_<?php echo $rows['payment_id']; ?>" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                <?php
+                                                        include('../app/modals/payments.php');
+                                                    }
+                                                } ?>
+                                            </tbody>
+                                        </table>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>
