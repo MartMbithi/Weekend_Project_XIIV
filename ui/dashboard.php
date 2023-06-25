@@ -335,33 +335,7 @@ require_once('../app/partials/head.php');
                     <div class="row">
                         <div class="col-xl-12 col-xxl-12">
                             <div class="row">
-                                <div class="col-xl-4  col-sm-4">
-                                    <div class="card border border-danger">
-                                        <div class="card-body">
-                                            <div class="media align-items-center">
-                                                <div class="media-body mr-3">
-                                                    <h2 class="fs-34 text-black font-w600"><?php echo $docs; ?></h2>
-                                                    <span>Vet Doctors</span>
-                                                </div>
-                                                <i class="text-danger fa fa-user-md fa-3x"></i>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4  col-sm-4">
-                                    <div class="card border border-danger">
-                                        <div class="card-body">
-                                            <div class="media align-items-center">
-                                                <div class="media-body mr-3">
-                                                    <h2 class="fs-34 text-black font-w600"><?php echo $clients; ?></h2>
-                                                    <span>Registered Clients</span>
-                                                </div>
-                                                <i class="text-danger fa fa-address-book fa-3x"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                                 <div class="col-xl-4  col-sm-4">
                                     <div class="card border border-danger">
                                         <div class="card-body">
@@ -388,7 +362,7 @@ require_once('../app/partials/head.php');
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xl-8  col-sm-8">
+                                <div class="col-xl-4  col-sm-4">
                                     <div class="card border border-danger">
                                         <div class="card-body">
                                             <div class="media align-items-center">

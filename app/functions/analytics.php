@@ -162,6 +162,16 @@ if ($login_rank == 'Admin') {
         $card = 0;
     }
 } else {
+    /* Pets */
+    $query = "SELECT COUNT(*) FROM pets p 
+    INNER JOIN client c ON c.client_id = p.pet_client_id
+    WHERE c.client_login_id = '{$login_id}'";
+    $stmt = $mysqli->prepare($query);
+    $stmt->execute();
+    $stmt->bind_result($pets);
+    $stmt->fetch();
+    $stmt->close();
+
     /* Treatments */
     $query = "SELECT COUNT(*) FROM treatments t 
     INNER JOIN pets p ON p.pet_id = t.treatment_pet_id
