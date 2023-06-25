@@ -123,49 +123,96 @@ require_once('../app/partials/head.php');
                             </div> -->
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="report_table display min-w850">
-                                        <thead>
-                                            <tr>
-                                                <th>Client</th>
-                                                <th>Pet</th>
-                                                <th>Doctor</th>
-                                                <th>Date</th>
-                                                <th>Cost</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            $fetch_records_sql = mysqli_query(
-                                                $mysqli,
-                                                "SELECT * FROM treatments t
-                                                INNER JOIN pets p ON p.pet_id = t.treatment_pet_id
-                                                INNER JOIN client c ON c.client_id = p.pet_client_id
-                                                INNER JOIN veterinary_doctor vd ON vd.doctor_id = t.treatment_doctor_id"
-                                            );
-                                            if (mysqli_num_rows($fetch_records_sql) > 0) {
-                                                while ($rows = mysqli_fetch_array($fetch_records_sql)) {
-                                            ?>
-                                                    <tr>
-                                                        <td>
-                                                            Names: <?php echo $rows['client_name']; ?> <br>
-                                                            Contact: <?php echo $rows['client_contact']; ?>
-                                                        </td>
-                                                        <td>
-                                                            Name:<?php echo $rows['pet_name']; ?><br>
-                                                            Breed: <?php echo $rows['pet_breed']; ?>
-                                                        </td>
-                                                        <td>
-                                                            Names: <?php echo $rows['doctor_name']; ?> <br>
-                                                            Contact: <?php echo $rows['doctor_contacts']; ?>
-                                                        </td>
-                                                        <td><?php echo date('d M Y', strtotime($rows['treatment_date'])); ?></td>
-                                                        <td>Ksh <?php echo number_format($rows['treatment_cost']); ?></td>
-                                                    </tr>
-                                            <?php
-                                                }
-                                            } ?>
-                                        </tbody>
-                                    </table>
+                                    <?php if ($_SESSION['login_rank'] == 'Client') { ?>
+                                        <table class="report_table display min-w850">
+                                            <thead>
+                                                <tr>
+                                                    <th>Client</th>
+                                                    <th>Pet</th>
+                                                    <th>Doctor</th>
+                                                    <th>Date</th>
+                                                    <th>Cost</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                $fetch_records_sql = mysqli_query(
+                                                    $mysqli,
+                                                    "SELECT * FROM treatments t
+                                                    INNER JOIN pets p ON p.pet_id = t.treatment_pet_id
+                                                    INNER JOIN client c ON c.client_id = p.pet_client_id
+                                                    INNER JOIN veterinary_doctor vd ON vd.doctor_id = t.treatment_doctor_id 
+                                                    WHERE c.client_login_id = '{$_SESSION['login_id']}'"
+                                                );
+                                                if (mysqli_num_rows($fetch_records_sql) > 0) {
+                                                    while ($rows = mysqli_fetch_array($fetch_records_sql)) {
+                                                ?>
+                                                        <tr>
+                                                            <td>
+                                                                Names: <?php echo $rows['client_name']; ?> <br>
+                                                                Contact: <?php echo $rows['client_contact']; ?>
+                                                            </td>
+                                                            <td>
+                                                                Name:<?php echo $rows['pet_name']; ?><br>
+                                                                Breed: <?php echo $rows['pet_breed']; ?>
+                                                            </td>
+                                                            <td>
+                                                                Names: <?php echo $rows['doctor_name']; ?> <br>
+                                                                Contact: <?php echo $rows['doctor_contacts']; ?>
+                                                            </td>
+                                                            <td><?php echo date('d M Y', strtotime($rows['treatment_date'])); ?></td>
+                                                            <td>Ksh <?php echo number_format($rows['treatment_cost']); ?></td>
+                                                        </tr>
+                                                <?php
+                                                    }
+                                                } ?>
+                                            </tbody>
+                                        </table>
+                                    <?php } else { ?>
+                                        <table class="report_table display min-w850">
+                                            <thead>
+                                                <tr>
+                                                    <th>Client</th>
+                                                    <th>Pet</th>
+                                                    <th>Doctor</th>
+                                                    <th>Date</th>
+                                                    <th>Cost</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                $fetch_records_sql = mysqli_query(
+                                                    $mysqli,
+                                                    "SELECT * FROM treatments t
+                                                    INNER JOIN pets p ON p.pet_id = t.treatment_pet_id
+                                                    INNER JOIN client c ON c.client_id = p.pet_client_id
+                                                    INNER JOIN veterinary_doctor vd ON vd.doctor_id = t.treatment_doctor_id"
+                                                );
+                                                if (mysqli_num_rows($fetch_records_sql) > 0) {
+                                                    while ($rows = mysqli_fetch_array($fetch_records_sql)) {
+                                                ?>
+                                                        <tr>
+                                                            <td>
+                                                                Names: <?php echo $rows['client_name']; ?> <br>
+                                                                Contact: <?php echo $rows['client_contact']; ?>
+                                                            </td>
+                                                            <td>
+                                                                Name:<?php echo $rows['pet_name']; ?><br>
+                                                                Breed: <?php echo $rows['pet_breed']; ?>
+                                                            </td>
+                                                            <td>
+                                                                Names: <?php echo $rows['doctor_name']; ?> <br>
+                                                                Contact: <?php echo $rows['doctor_contacts']; ?>
+                                                            </td>
+                                                            <td><?php echo date('d M Y', strtotime($rows['treatment_date'])); ?></td>
+                                                            <td>Ksh <?php echo number_format($rows['treatment_cost']); ?></td>
+                                                        </tr>
+                                                <?php
+                                                    }
+                                                } ?>
+                                            </tbody>
+                                        </table>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>
