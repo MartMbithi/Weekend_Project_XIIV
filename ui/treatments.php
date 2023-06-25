@@ -124,62 +124,116 @@ require_once('../app/partials/head.php');
                             </div> -->
                             <div class="card-body">
                                 <div class="table-responsive">
+                                    <?php if ($_SESSION['login_rank'] == 'Client') { ?>
 
-                                    <table id="example3" class="display min-w850">
-                                        <thead>
-                                            <tr>
-                                                <th>Client</th>
-                                                <th>Pet</th>
-                                                <th>Doctor</th>
-                                                <th>Date</th>
-                                                <th>Cost</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            $fetch_records_sql = mysqli_query(
-                                                $mysqli,
-                                                "SELECT * FROM treatments t
-                                                INNER JOIN pets p ON p.pet_id = t.treatment_pet_id
-                                                INNER JOIN client c ON c.client_id = p.pet_client_id
-                                                INNER JOIN veterinary_doctor vd ON vd.doctor_id = t.treatment_doctor_id"
-                                            );
-                                            if (mysqli_num_rows($fetch_records_sql) > 0) {
-                                                while ($rows = mysqli_fetch_array($fetch_records_sql)) {
-                                            ?>
-                                                    <tr>
-                                                        <td>
-                                                            Names: <?php echo $rows['client_name']; ?> <br>
-                                                            Contact: <?php echo $rows['client_contact']; ?>
-                                                        </td>
-                                                        <td>
-                                                            Name:<?php echo $rows['pet_name']; ?><br>
-                                                            Breed: <?php echo $rows['pet_breed']; ?>
-                                                        </td>
-                                                        <td>
-                                                            Names: <?php echo $rows['doctor_name']; ?> <br>
-                                                            Contact: <?php echo $rows['doctor_contacts']; ?>
-                                                        </td>
-                                                        <td><?php echo date('d M Y', strtotime($rows['treatment_date'])); ?></td>
-                                                        <td>Ksh <?php echo number_format($rows['treatment_cost']); ?></td>
-                                                        <td>
-                                                            <div class="d-flex">
-                                                                <?php if ($rows['treatment_status'] == 'Pending') { ?>
-                                                                    <a data-toggle="modal" href="#pay_<?php echo $rows['treatment_id']; ?>" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-money"></i></a>
-                                                                <?php } ?>
-                                                                <a data-toggle="modal" href="#eye_<?php echo $rows['treatment_id']; ?>" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-eye"></i></a>
-                                                                <a data-toggle="modal" href="#edit_<?php echo $rows['treatment_id']; ?>" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
-                                                                <a data-toggle="modal" href="#delete_<?php echo $rows['treatment_id']; ?>" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                            <?php
-                                                    include('../app/modals/treatments.php');
-                                                }
-                                            } ?>
-                                        </tbody>
-                                    </table>
+                                        <table id="example3" class="display min-w850">
+                                            <thead>
+                                                <tr>
+                                                    <th>Client</th>
+                                                    <th>Pet</th>
+                                                    <th>Doctor</th>
+                                                    <th>Date</th>
+                                                    <th>Cost</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                $fetch_records_sql = mysqli_query(
+                                                    $mysqli,
+                                                    "SELECT * FROM treatments t
+                                                    INNER JOIN pets p ON p.pet_id = t.treatment_pet_id
+                                                    INNER JOIN client c ON c.client_id = p.pet_client_id
+                                                    INNER JOIN veterinary_doctor vd ON vd.doctor_id = t.treatment_doctor_id
+                                                    WHERE c.client_login_id = '{$_SESSION['login_id']}'"
+                                                );
+                                                if (mysqli_num_rows($fetch_records_sql) > 0) {
+                                                    while ($rows = mysqli_fetch_array($fetch_records_sql)) {
+                                                ?>
+                                                        <tr>
+                                                            <td>
+                                                                Names: <?php echo $rows['client_name']; ?> <br>
+                                                                Contact: <?php echo $rows['client_contact']; ?>
+                                                            </td>
+                                                            <td>
+                                                                Name:<?php echo $rows['pet_name']; ?><br>
+                                                                Breed: <?php echo $rows['pet_breed']; ?>
+                                                            </td>
+                                                            <td>
+                                                                Names: <?php echo $rows['doctor_name']; ?> <br>
+                                                                Contact: <?php echo $rows['doctor_contacts']; ?>
+                                                            </td>
+                                                            <td><?php echo date('d M Y', strtotime($rows['treatment_date'])); ?></td>
+                                                            <td>Ksh <?php echo number_format($rows['treatment_cost']); ?></td>
+                                                            <td>
+                                                                <div class="d-flex">
+                                                                    <a data-toggle="modal" href="#eye_<?php echo $rows['treatment_id']; ?>" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-eye"></i></a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                <?php
+                                                        include('../app/modals/treatments.php');
+                                                    }
+                                                } ?>
+                                            </tbody>
+                                        </table>
+                                    <?php } else { ?>
+                                        <table id="example3" class="display min-w850">
+                                            <thead>
+                                                <tr>
+                                                    <th>Client</th>
+                                                    <th>Pet</th>
+                                                    <th>Doctor</th>
+                                                    <th>Date</th>
+                                                    <th>Cost</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                $fetch_records_sql = mysqli_query(
+                                                    $mysqli,
+                                                    "SELECT * FROM treatments t
+                                                    INNER JOIN pets p ON p.pet_id = t.treatment_pet_id
+                                                    INNER JOIN client c ON c.client_id = p.pet_client_id
+                                                    INNER JOIN veterinary_doctor vd ON vd.doctor_id = t.treatment_doctor_id"
+                                                );
+                                                if (mysqli_num_rows($fetch_records_sql) > 0) {
+                                                    while ($rows = mysqli_fetch_array($fetch_records_sql)) {
+                                                ?>
+                                                        <tr>
+                                                            <td>
+                                                                Names: <?php echo $rows['client_name']; ?> <br>
+                                                                Contact: <?php echo $rows['client_contact']; ?>
+                                                            </td>
+                                                            <td>
+                                                                Name:<?php echo $rows['pet_name']; ?><br>
+                                                                Breed: <?php echo $rows['pet_breed']; ?>
+                                                            </td>
+                                                            <td>
+                                                                Names: <?php echo $rows['doctor_name']; ?> <br>
+                                                                Contact: <?php echo $rows['doctor_contacts']; ?>
+                                                            </td>
+                                                            <td><?php echo date('d M Y', strtotime($rows['treatment_date'])); ?></td>
+                                                            <td>Ksh <?php echo number_format($rows['treatment_cost']); ?></td>
+                                                            <td>
+                                                                <div class="d-flex">
+                                                                    <?php if ($rows['treatment_status'] == 'Pending') { ?>
+                                                                        <a data-toggle="modal" href="#pay_<?php echo $rows['treatment_id']; ?>" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-money"></i></a>
+                                                                    <?php } ?>
+                                                                    <a data-toggle="modal" href="#eye_<?php echo $rows['treatment_id']; ?>" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-eye"></i></a>
+                                                                    <a data-toggle="modal" href="#edit_<?php echo $rows['treatment_id']; ?>" class="btn btn-primary shadow btn-xs sharp mr-1"><i class="fa fa-pencil"></i></a>
+                                                                    <a data-toggle="modal" href="#delete_<?php echo $rows['treatment_id']; ?>" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                <?php
+                                                        include('../app/modals/treatments.php');
+                                                    }
+                                                } ?>
+                                            </tbody>
+                                        </table>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>
