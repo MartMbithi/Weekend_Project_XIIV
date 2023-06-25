@@ -97,132 +97,132 @@ require_once('../app/partials/head.php');
             Sidebar end
         ***********************************-->
         <?php
-        $login_id = mysqli_real_escape_string($mysqli, $_SESSION['login_id']);
-        $fetch_records_sql = mysqli_query(
-            $mysqli,
-            "SELECT *  FROM veterinary_doctor vd
+        if ($_SESSION['login_rank'] == 'Admin') {
+            $login_id = mysqli_real_escape_string($mysqli, $_SESSION['login_id']);
+            $fetch_records_sql = mysqli_query(
+                $mysqli,
+                "SELECT *  FROM veterinary_doctor vd
             INNER JOIN login l ON l.login_id = vd.doctor_login_id
             WHERE l.login_id = '{$login_id}'"
-        );
-        if (mysqli_num_rows($fetch_records_sql) > 0) {
-            while ($rows = mysqli_fetch_array($fetch_records_sql)) {
+            );
+            if (mysqli_num_rows($fetch_records_sql) > 0) {
+                while ($rows = mysqli_fetch_array($fetch_records_sql)) {
         ?>
 
-                <!--**********************************
-            Content body start
-        ***********************************-->
-                <div class="content-body">
-                    <div class="container-fluid">
-                        <div class="page-titles">
-                            <h4>Profile</h4>
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="dashboard">Dashboard</a></li>
-                                <li class="breadcrumb-item active"><a href="javascript:void(0)">Profile</a></li>
-                            </ol>
-                        </div>
-                        <!-- row -->
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="profile card card-body px-3 pt-3 pb-0">
-                                    <div class="profile-head">
-                                        <div class="photo-content">
-                                            <div style="background: url(../public/images/banner3.jpg); background-size: cover; background-position: center; min-height: 250px;
+
+                    <div class="content-body">
+                        <div class="container-fluid">
+                            <div class="page-titles">
+                                <h4>Profile</h4>
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="dashboard">Dashboard</a></li>
+                                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Profile</a></li>
+                                </ol>
+                            </div>
+                            <!-- row -->
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="profile card card-body px-3 pt-3 pb-0">
+                                        <div class="profile-head">
+                                            <div class="photo-content">
+                                                <div style="background: url(../public/images/banner3.jpg); background-size: cover; background-position: center; min-height: 250px;
                                             width: 100%;">
-                                            </div>
-                                        </div>
-                                        <div class="profile-info">
-                                            <div class="profile-photo">
-                                                <img src="../public/images/profile.png" class="img-fluid rounded-circle" alt="">
-                                            </div>
-                                            <div class="profile-details">
-                                                <div class="profile-name px-3 pt-2">
-                                                    <h4 class="text-primary mb-0"><?php echo $rows['doctor_name']; ?></h4>
-                                                    <p><?php echo $rows['login_rank']; ?></p>
                                                 </div>
-                                                <div class="profile-email px-2 pt-2">
-                                                    <h4 class="text-muted mb-0"><?php echo $rows['doctor_email']; ?></h4>
-                                                    <p>Email</p>
+                                            </div>
+                                            <div class="profile-info">
+                                                <div class="profile-photo">
+                                                    <img src="../public/images/profile.png" class="img-fluid rounded-circle" alt="">
+                                                </div>
+                                                <div class="profile-details">
+                                                    <div class="profile-name px-3 pt-2">
+                                                        <h4 class="text-primary mb-0"><?php echo $rows['doctor_name']; ?></h4>
+                                                        <p><?php echo $rows['login_rank']; ?></p>
+                                                    </div>
+                                                    <div class="profile-email px-2 pt-2">
+                                                        <h4 class="text-muted mb-0"><?php echo $rows['doctor_email']; ?></h4>
+                                                        <p>Email</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="profile-tab">
-                                            <div class="custom-tab-1">
-                                                <ul class="nav nav-tabs">
-                                                    <li class="nav-item">
-                                                        <a href="#my-posts" data-toggle="tab" class="nav-link active show">
-                                                            Personal Details
-                                                        </a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="#about-me" data-toggle="tab" class="nav-link">
-                                                            Authentication Details
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                                <div class="tab-content">
-                                                    <div id="my-posts" class="tab-pane fade active show">
-                                                        <br>
-                                                        <!-- Update Personal Details -->
-                                                        <form class="needs-validation" method="post" enctype="multipart/form-data" role="form">
-                                                            <div class="row">
-                                                                <div class="form-group col-md-6">
-                                                                    <label for="">Full names</label>
-                                                                    <input type="hidden" required name="doctor_login_id" value="<?php echo $rows['doctor_login_id']; ?>" class="form-control">
-                                                                    <input type="text" required name="doctor_name" value="<?php echo $rows['doctor_name']; ?>" class="form-control">
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="profile-tab">
+                                                <div class="custom-tab-1">
+                                                    <ul class="nav nav-tabs">
+                                                        <li class="nav-item">
+                                                            <a href="#my-posts" data-toggle="tab" class="nav-link active show">
+                                                                Personal Details
+                                                            </a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a href="#about-me" data-toggle="tab" class="nav-link">
+                                                                Authentication Details
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="tab-content">
+                                                        <div id="my-posts" class="tab-pane fade active show">
+                                                            <br>
+                                                            <!-- Update Personal Details -->
+                                                            <form class="needs-validation" method="post" enctype="multipart/form-data" role="form">
+                                                                <div class="row">
+                                                                    <div class="form-group col-md-6">
+                                                                        <label for="">Full names</label>
+                                                                        <input type="hidden" required name="doctor_login_id" value="<?php echo $rows['doctor_login_id']; ?>" class="form-control">
+                                                                        <input type="text" required name="doctor_name" value="<?php echo $rows['doctor_name']; ?>" class="form-control">
+                                                                    </div>
+                                                                    <div class="form-group col-md-6">
+                                                                        <label for="">Contacts</label>
+                                                                        <input type="text" required name="doctor_contacts" value="<?php echo $rows['doctor_contacts']; ?>" class="form-control">
+                                                                    </div>
+                                                                    <div class="form-group col-md-6">
+                                                                        <label for="">Email</label>
+                                                                        <input type="text" required name="doctor_email" value="<?php echo $rows['doctor_email']; ?>" class="form-control">
+                                                                    </div>
+                                                                    <div class="form-group col-md-6">
+                                                                        <label for="">Access Level</label>
+                                                                        <input readonly type="text" required name="login_rank" value="<?php echo $rows['login_rank']; ?>" class="form-control">
+                                                                    </div>
+                                                                    <div class="form-group col-md-12">
+                                                                        <label for="">Adddress</label>
+                                                                        <input type="text" required name="doctor_address" value="<?php echo $rows['doctor_address']; ?>" class="form-control">
+                                                                    </div>
                                                                 </div>
-                                                                <div class="form-group col-md-6">
-                                                                    <label for="">Contacts</label>
-                                                                    <input type="text" required name="doctor_contacts" value="<?php echo $rows['doctor_contacts']; ?>" class="form-control">
+                                                                <div class="text-right">
+                                                                    <button type="submit" name="Update_Officer" class="btn btn-outline-danger">Save</button>
                                                                 </div>
-                                                                <div class="form-group col-md-6">
-                                                                    <label for="">Email</label>
-                                                                    <input type="text" required name="doctor_email" value="<?php echo $rows['doctor_email']; ?>" class="form-control">
-                                                                </div>
-                                                                <div class="form-group col-md-6">
-                                                                    <label for="">Access Level</label>
-                                                                    <input readonly type="text" required name="login_rank" value="<?php echo $rows['login_rank']; ?>" class="form-control">
-                                                                </div>
-                                                                <div class="form-group col-md-12">
-                                                                    <label for="">Adddress</label>
-                                                                    <input type="text" required name="doctor_address" value="<?php echo $rows['doctor_address']; ?>" class="form-control">
-                                                                </div>
-                                                            </div>
-                                                            <div class="text-right">
-                                                                <button type="submit" name="Update_Officer" class="btn btn-outline-danger">Save</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
+                                                            </form>
+                                                        </div>
 
-                                                    <div id="about-me" class="tab-pane fade">
-                                                        <br>
-                                                        <!-- Update Auth Details -->
-                                                        <form class="needs-validation" method="post" enctype="multipart/form-data" role="form">
-                                                            <div class="row">
-                                                                <div class="form-group col-md-12">
-                                                                    <label for="">Login Username</label>
-                                                                    <input type="email" required name="login_email" value="<?php echo $rows['login_email']; ?>" class="form-control">
+                                                        <div id="about-me" class="tab-pane fade">
+                                                            <br>
+                                                            <!-- Update Auth Details -->
+                                                            <form class="needs-validation" method="post" enctype="multipart/form-data" role="form">
+                                                                <div class="row">
+                                                                    <div class="form-group col-md-12">
+                                                                        <label for="">Login Username</label>
+                                                                        <input type="email" required name="login_email" value="<?php echo $rows['login_email']; ?>" class="form-control">
+                                                                    </div>
+                                                                    <div class="form-group col-md-6">
+                                                                        <label for="">New Password</label>
+                                                                        <input type="password" required name="new_password" class="form-control">
+                                                                    </div>
+                                                                    <div class="form-group col-md-6">
+                                                                        <label for="">Confirm Password</label>
+                                                                        <input type="password" required name="confirm_password" class="form-control">
+                                                                    </div>
                                                                 </div>
-                                                                <div class="form-group col-md-6">
-                                                                    <label for="">New Password</label>
-                                                                    <input type="password" required name="new_password" class="form-control">
+                                                                <div class="text-right">
+                                                                    <button type="submit" name="Update_Auth_Details" class="btn btn-outline-danger">Update Passwords</button>
                                                                 </div>
-                                                                <div class="form-group col-md-6">
-                                                                    <label for="">Confirm Password</label>
-                                                                    <input type="password" required name="confirm_password" class="form-control">
-                                                                </div>
-                                                            </div>
-                                                            <div class="text-right">
-                                                                <button type="submit" name="Update_Auth_Details" class="btn btn-outline-danger">Update Passwords</button>
-                                                            </div>
-                                                        </form>
+                                                            </form>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -232,11 +232,147 @@ require_once('../app/partials/head.php');
                             </div>
                         </div>
                     </div>
-                </div>
-                <!--**********************************
+                    <!--**********************************
+            Content body end
+        ***********************************-->
+                <?php }
+            }
+        } else {
+            $login_id = mysqli_real_escape_string($mysqli, $_SESSION['login_id']);
+            $fetch_records_sql = mysqli_query(
+                $mysqli,
+                "SELECT * FROM client c
+                INNER JOIN login l ON l.login_id =c.client_login_id
+            WHERE l.login_id = '{$login_id}'"
+            );
+            if (mysqli_num_rows($fetch_records_sql) > 0) {
+                while ($rows = mysqli_fetch_array($fetch_records_sql)) {
+                ?>
+
+
+                    <div class="content-body">
+                        <div class="container-fluid">
+                            <div class="page-titles">
+                                <h4>Profile</h4>
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="dashboard">Dashboard</a></li>
+                                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Profile</a></li>
+                                </ol>
+                            </div>
+                            <!-- row -->
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="profile card card-body px-3 pt-3 pb-0">
+                                        <div class="profile-head">
+                                            <div class="photo-content">
+                                                <div style="background: url(../public/images/banner3.jpg); background-size: cover; background-position: center; min-height: 250px;
+                                            width: 100%;">
+                                                </div>
+                                            </div>
+                                            <div class="profile-info">
+                                                <div class="profile-photo">
+                                                    <img src="../public/images/profile.png" class="img-fluid rounded-circle" alt="">
+                                                </div>
+                                                <div class="profile-details">
+                                                    <div class="profile-name px-3 pt-2">
+                                                        <h4 class="text-primary mb-0"><?php echo $rows['client_name']; ?></h4>
+                                                        <p><?php echo $rows['login_rank']; ?></p>
+                                                    </div>
+                                                    <div class="profile-email px-2 pt-2">
+                                                        <h4 class="text-muted mb-0"><?php echo $rows['client_email']; ?></h4>
+                                                        <p>Email</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="profile-tab">
+                                                <div class="custom-tab-1">
+                                                    <ul class="nav nav-tabs">
+                                                        <li class="nav-item">
+                                                            <a href="#my-posts" data-toggle="tab" class="nav-link active show">
+                                                                Personal Details
+                                                            </a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a href="#about-me" data-toggle="tab" class="nav-link">
+                                                                Authentication Details
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="tab-content">
+                                                        <div id="my-posts" class="tab-pane fade active show">
+                                                            <br>
+                                                            <!-- Update Personal Details -->
+                                                            <form class="needs-validation" method="post" enctype="multipart/form-data" role="form">
+                                                                <div class="row">
+                                                                    <div class="form-group col-md-12">
+                                                                        <label for="">Full names</label>
+                                                                        <input type="text" required name="client_name" value="<?php echo $rows['client_name']; ?>" class="form-control">
+                                                                        <input type="hidden" required name="client_id" value="<?php echo $rows['client_id']; ?>" class="form-control">
+                                                                    </div>
+                                                                    <div class="form-group col-md-6">
+                                                                        <label for="">Email</label>
+                                                                        <input type="email" required name="client_email" value="<?php echo $rows['client_email']; ?>" class="form-control">
+                                                                    </div>
+                                                                    <div class="form-group col-md-6">
+                                                                        <label for="">Contacts</label>
+                                                                        <input type="text" required name="client_contact" value="<?php echo $rows['client_contact']; ?>" class="form-control">
+                                                                    </div>
+                                                                    <div class="form-group col-md-12">
+                                                                        <label for="">Address</label>
+                                                                        <input type="text" required name="client_address" value="<?php echo $rows['client_address']; ?>" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="text-right">
+                                                                    <button type="submit" name="Update_Client" class="btn btn-outline-danger">Save</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+
+                                                        <div id="about-me" class="tab-pane fade">
+                                                            <br>
+                                                            <!-- Update Auth Details -->
+                                                            <form class="needs-validation" method="post" enctype="multipart/form-data" role="form">
+                                                                <div class="row">
+                                                                    <div class="form-group col-md-12">
+                                                                        <label for="">Login Username</label>
+                                                                        <input type="email" required name="login_email" value="<?php echo $rows['login_email']; ?>" class="form-control">
+                                                                    </div>
+                                                                    <div class="form-group col-md-6">
+                                                                        <label for="">New Password</label>
+                                                                        <input type="password" required name="new_password" class="form-control">
+                                                                    </div>
+                                                                    <div class="form-group col-md-6">
+                                                                        <label for="">Confirm Password</label>
+                                                                        <input type="password" required name="confirm_password" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="text-right">
+                                                                    <button type="submit" name="Update_Auth_Details" class="btn btn-outline-danger">Update Passwords</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--**********************************
             Content body end
         ***********************************-->
         <?php }
+            }
         } ?>
 
         <!--**********************************
