@@ -176,8 +176,8 @@ if ($login_rank == 'Admin') {
     /* Paymenets */
     $query = "SELECT SUM(payment_amount) FROM payments p
     INNER JOIN treatments t ON t.treatment_id = p.payment_treatment_id
-    INNER JOIN pets p ON p.pet_id = t.treatment_pet_id
-    INNER JOIN client c ON c.client_id = p.pet_client_id
+    INNER JOIN pets pe ON pe.pet_id = t.treatment_pet_id
+    INNER JOIN client c ON c.client_id = pe.pet_client_id
     WHERE c.client_login_id = '{$login_id}'";
     $stmt = $mysqli->prepare($query);
     $stmt->execute();
