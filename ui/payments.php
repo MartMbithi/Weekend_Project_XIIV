@@ -133,7 +133,6 @@ require_once('../app/partials/head.php');
                                                     <th>Amount</th>
                                                     <th>Date Paid</th>
                                                     <th>Means</th>
-                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -154,11 +153,6 @@ require_once('../app/partials/head.php');
                                                             <td>Ksh <?php echo number_format($rows['payment_amount']); ?></td>
                                                             <td><?php echo date('d M Y', strtotime($rows['payment_date'])); ?></td>
                                                             <td><?php echo $rows['payment_means']; ?></td>
-                                                            <td>
-                                                                <div class="d-flex">
-                                                                    <a data-toggle="modal" href="#delete_<?php echo $rows['payment_id']; ?>" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
-                                                                </div>
-                                                            </td>
                                                         </tr>
                                                 <?php
                                                         include('../app/modals/payments.php');

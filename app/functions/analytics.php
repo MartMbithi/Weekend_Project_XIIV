@@ -68,7 +68,7 @@
 $login_rank = mysqli_real_escape_string($mysqli, $_SESSION['login_rank']);
 $login_id = mysqli_real_escape_string($mysqli, $_SESSION['login_id']);
 
-if ($login_rank == 'Admin') {
+if ($login_rank == 'Admin' || $login_rank == 'Doctor') {
 
     /* Doctors */
     $query = "SELECT COUNT(*) FROM veterinary_doctor";

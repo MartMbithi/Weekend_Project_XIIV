@@ -98,7 +98,7 @@ require_once('../app/partials/head.php');
         <!--**********************************
             Content body start
         ***********************************-->
-        <?php if ($_SESSION['login_rank'] == 'Admin') { ?>
+        <?php if ($_SESSION['login_rank'] == 'Admin' || $_SESSION['login_rank'] == 'Doctor' ) { ?>
             <div class="content-body">
                 <!-- row -->
                 <div class="container-fluid">
@@ -336,7 +336,7 @@ require_once('../app/partials/head.php');
                         <div class="col-xl-12 col-xxl-12">
                             <div class="row">
 
-                                <div class="col-xl-4  col-sm-4">
+                                <!-- <div class="col-xl-4  col-sm-4">
                                     <div class="card border border-danger">
                                         <div class="card-body">
                                             <div class="media align-items-center">
@@ -348,8 +348,8 @@ require_once('../app/partials/head.php');
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-xl-4  col-sm-4">
+                                </div> -->
+                                <div class="col-xl-6  col-sm-6">
                                     <div class="card border border-danger">
                                         <div class="card-body">
                                             <div class="media align-items-center">
@@ -362,7 +362,7 @@ require_once('../app/partials/head.php');
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xl-4  col-sm-4">
+                                <div class="col-xl-6  col-sm-6">
                                     <div class="card border border-danger">
                                         <div class="card-body">
                                             <div class="media align-items-center">
