@@ -335,7 +335,7 @@ require_once('../app/partials/head.php');
                     <div class="row">
                         <div class="col-xl-12 col-xxl-12">
                             <div class="row">
-                                
+
                                 <div class="col-xl-4  col-sm-4">
                                     <div class="card border border-danger">
                                         <div class="card-body">
@@ -383,7 +383,7 @@ require_once('../app/partials/head.php');
                                 <div class="col-xl-12 col-xxl-12 col-md-12">
                                     <div class="card">
                                         <div class="card-header border-0 pb-0">
-                                            <h4 class="card-title">Treatments Summary</h4>
+                                            <h4 class="card-title"> My Pets Treatments Summary</h4>
                                         </div>
                                         <div class="card-body">
                                             <table id="example3" class="display min-w850">
@@ -402,9 +402,10 @@ require_once('../app/partials/head.php');
                                                     $fetch_records_sql = mysqli_query(
                                                         $mysqli,
                                                         "SELECT * FROM treatments t
-                                                    INNER JOIN pets p ON p.pet_id = t.treatment_pet_id
-                                                    INNER JOIN client c ON c.client_id = p.pet_client_id
-                                                    INNER JOIN veterinary_doctor vd ON vd.doctor_id = t.treatment_doctor_id"
+                                                        INNER JOIN pets p ON p.pet_id = t.treatment_pet_id
+                                                        INNER JOIN client c ON c.client_id = p.pet_client_id
+                                                        INNER JOIN veterinary_doctor vd ON vd.doctor_id = t.treatment_doctor_id
+                                                        WHERE c.client_login_id = '{$_SESSION['login_id']}'"
                                                     );
                                                     if (mysqli_num_rows($fetch_records_sql) > 0) {
                                                         while ($rows = mysqli_fetch_array($fetch_records_sql)) {
@@ -447,7 +448,7 @@ require_once('../app/partials/head.php');
                                     </div>
                                 </div>
                                 <!-- Revenue Summary -->
-                                <div class="col-xl-6 col-xxl-6 col-md-6">
+                                <div class="col-xl-12 col-xxl-12 col-md-12">
                                     <div class="card">
                                         <div class="card-header border-0 pb-0">
                                             <h4 class="card-title">Revenue / Payment Summary</h4>
@@ -466,7 +467,11 @@ require_once('../app/partials/head.php');
                                                     <?php
                                                     $fetch_records_sql = mysqli_query(
                                                         $mysqli,
-                                                        "SELECT * FROM payments"
+                                                        "SELECT * FROM payments p
+                                                        INNER JOIN treatments t ON t.treatment_id = p.payment_treatment_id
+                                                        INNER JOIN pets pe ON pe.pet_id = t.treatment_pet_id
+                                                        INNER JOIN client c ON c.client_id = pe.pet_client_id
+                                                        WHERE c.client_login_id = '{$_SESSION['login_id']}'"
                                                     );
                                                     if (mysqli_num_rows($fetch_records_sql) > 0) {
                                                         while ($rows = mysqli_fetch_array($fetch_records_sql)) {
@@ -485,48 +490,6 @@ require_once('../app/partials/head.php');
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Revenue Streams Trend -->
-                                <div class="col-xl-6 col-xxl-6 col-md-6">
-                                    <div class="card">
-                                        <div class="card-header border-0 pb-0">
-                                            <h4 class="card-title">Revenue Streams Trend</h4>
-                                        </div>
-                                        <div class="card-body">
-                                            <div id="donutChart"></div>
-                                            <div class="d-flex justify-content-between mt-4">
-                                                <div class="pr-2">
-                                                    <svg width="20" height="8" viewBox="0 0 20 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <rect width="20" height="8" rx="4" fill="#214BB8" />
-                                                    </svg>
-                                                    <h4 class="fs-18 text-black mb-1 font-w600">Ksh <?php echo number_format($cash); ?></h4>
-                                                    <span class="fs-14">Cash</span>
-                                                </div>
-                                                <div class="pr-2">
-                                                    <svg width="20" height="8" viewBox="0 0 20 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <rect width="20" height="8" rx="4" fill="#FE634E" />
-                                                    </svg>
-                                                    <h4 class="fs-18 text-black mb-1 font-w600">Ksh <?php echo number_format($mpesa); ?></h4>
-                                                    <span class="fs-14">Mpesa</span>
-                                                </div>
-                                                <div class="">
-                                                    <svg width="20" height="8" viewBox="0 0 20 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <rect width="20" height="8" rx="4" fill="#45ADDA" />
-                                                    </svg>
-                                                    <h4 class="fs-18 text-black mb-1 font-w600">Ksh <?php echo number_format($bank); ?></h4>
-                                                    <span class="fs-14">Bank Deposits</span>
-                                                </div>
-                                                <div class="">
-                                                    <svg width="20" height="8" viewBox="0 0 20 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <rect width="20" height="8" rx="4" fill="#2bc155" />
-                                                    </svg>
-                                                    <h4 class="fs-18 text-black mb-1 font-w600">Ksh <?php echo number_format($card); ?></h4>
-                                                    <span class="fs-14">Debit / Credit Cards</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End Trend -->
                             </div>
                         </div>
                     </div>
