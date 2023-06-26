@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 24, 2023 at 07:21 PM
+-- Generation Time: Jun 26, 2023 at 05:21 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -41,7 +41,7 @@ CREATE TABLE `client` (
 --
 
 INSERT INTO `client` (`client_id`, `client_login_id`, `client_name`, `client_email`, `client_contact`, `client_address`) VALUES
-(1, 1, 'James Monroe', 'jamesmonroe90@gmail.com', '+254 9952 623', '120-90126 Machakos'),
+(1, 1, 'James Mon Roe', 'jamesmonroe90@gmail.com', '+254 9952 623', '120-90126 Machakos'),
 (3, 7, 'Hillary Gandhi', 'hillaryga90@gmail.com', '11-11094134', '120 Delhi'),
 (4, 8, 'Lurding Kamau', 'lkiiou.9903@gmail.com', '+254737124', '120 Localhost');
 
